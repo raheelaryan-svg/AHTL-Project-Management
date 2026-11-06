@@ -1,0 +1,1179 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AHTL | Project Management Portal</title><style>
+:root{font-family:Inter,Segoe UI,Arial,sans-serif;color:#1b2c40;background:#f3f6fa}*{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:7px;padding:9px 13px;background:#164d7c;color:white}button.secondary{background:white;color:#164d7c;border:1px solid #cbd6e1}button.warn{background:#a74d25}button:disabled{opacity:.4;cursor:not-allowed}input,select,textarea{padding:9px;border:1px solid #cbd6e1;border-radius:7px;background:white;width:100%}textarea{min-height:75px}.app{display:flex;min-height:100vh}.side{width:238px;flex-shrink:0;background:#112b47;color:white;padding:20px 12px}.brand{font-weight:800;font-size:20px;padding:10px 10px 24px}.brand small{display:block;font-size:11px;font-weight:400;color:#b5c7da;margin-top:5px}.nav{display:block;width:100%;text-align:left;background:transparent;padding:12px;margin:2px 0;color:#dbe7f4}.nav.active,.nav:hover{background:#244a70}.main{padding:26px;min-width:0;flex:1;max-width:calc(100vw - 238px)}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:22px}.top h1{margin:0;font-size:25px}.muted{color:#67788c;font-size:12px}.card{background:white;border:1px solid #e0e7ef;border-radius:12px;padding:18px;margin-bottom:17px;box-shadow:0 2px 9px #1b3a5b09}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.kpi strong{font-size:28px;display:block}.kpi span{color:#66778b;font-size:12px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px;white-space:nowrap}th,td{padding:12px 10px;border-bottom:1px solid #e8edf3;text-align:left}th{background:#f7f9fc;color:#53677b;font-weight:600}.pill{display:inline-block;border-radius:15px;padding:4px 9px;font-size:11px;background:#e9eef5}.pill.Delayed,.pill.Rejected{background:#ffead6;color:#a84b0b}.pill.In-Progress{background:#dcecff;color:#175caa}.pill.Upcoming{background:#edf0f4;color:#5e6b7b}.pill.Active,.pill.Completed,.pill.Approved{background:#def5e8;color:#166543}.pill.Pending,.pill.At-risk{background:#fff0c8;color:#7c5800}.progress{height:8px;background:#e5ebf2;border-radius:12px;overflow:hidden;min-width:100px;margin-top:5px}.progress>div{height:100%;background:#168575}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}label{display:block;font-size:12px;font-weight:600;color:#40536a;margin-bottom:5px}.field{margin-bottom:13px}.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.hidden{display:none!important}.sectionTitle{display:flex;justify-content:space-between;align-items:center;gap:10px}.sectionTitle h2{font-size:17px}.task{border:1px solid #dce5ef;border-radius:9px;padding:12px;margin:8px 0}.task summary{cursor:pointer;font-weight:600}.task p{color:#526579;font-size:12px}.small{font-size:12px}.tag{font-size:11px;padding:3px 7px;background:#e8f0fa;border-radius:4px}.gantt{overflow:auto;border:1px solid #dce5ef;border-radius:8px}.ghead,.grow{display:flex;min-width:850px}.gname{width:210px;flex-shrink:0;border-right:1px solid #dce5ef;padding:8px;font-size:12px}.gtime{position:relative;flex:1;min-width:630px}.ghead .gtime{display:flex;height:34px}.tick{border-right:1px solid #dce5ef;text-align:center;font-size:11px;padding:9px 2px;flex:1;background:#f4f7fa}.grow{border-top:1px solid #e9edf2;min-height:64px}.grow .gname{padding:9px}.gtime .bar{position:absolute;height:10px;border-radius:3px;min-width:2px}.bar.plan{top:13px;background:#6998d6}.bar.actual{top:34px;background:#168575}.bar.late{background:#d67b3e}.lineLabel{position:absolute;left:2px;font-size:9px;color:#63758a}.lineLabel.p{top:0}.lineLabel.a{top:23px}.legend{display:flex;gap:15px;font-size:12px;margin:10px 0}.dot{width:12px;height:9px;display:inline-block;margin-right:4px}.note{padding:12px;border-left:3px solid #3c80bb;background:#eef5fc;font-size:12px;margin:12px 0}.audit{font-size:12px;padding:8px;border-bottom:1px solid #edf0f4}.scroll{max-height:360px;overflow:auto}.right{margin-left:auto} @media(max-width:900px){.side{width:170px}.main{max-width:calc(100vw - 170px);padding:14px}.kpis{grid-template-columns:repeat(2,1fr)}.grid2,.grid3{grid-template-columns:1fr}}@media(max-width:620px){.app{display:block}.side{width:auto}.nav{display:inline-block;width:auto}.main{max-width:100vw}.top{flex-wrap:wrap}}
+.pdf-overlay{position:fixed;inset:0;background:#112b4788;z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px}.pdf-dialog{width:min(560px,100%);background:white;border-radius:12px;padding:22px;box-shadow:0 15px 55px #12283e44}.pdf-dialog h2{margin:0 0 16px}.pdf-dialog .field{padding:10px 0;border-bottom:1px solid #edf0f4}.pdf-dialog label{font-size:14px}
+
+.part-thumb{width:64px;height:58px;object-fit:contain;background:#fff;border:1px solid #d7e0e9;border-radius:7px;flex-shrink:0}.part-cell{display:flex;align-items:center;gap:10px;min-width:190px}.part-preview{width:135px;height:110px;object-fit:contain;border:1px solid #d7e0e9;border-radius:8px;background:white}.part-placeholder{display:flex;align-items:center;justify-content:center;flex-direction:column;box-sizing:border-box;padding:4px;font-size:10px;color:#64748b;text-align:center;white-space:normal;overflow-wrap:break-word;line-height:1.25}.part-clickable{cursor:pointer;border:2px dashed #91b4d4}.part-clickable:hover{background:#eaf4ff}.part-upload-help{font-size:12px;color:#64748b;margin-top:5px}
+
+.flow-wrap{max-width:1100px;margin:auto}.flow-step{border:1px solid #cbd9e8;border-left:5px solid #6a96cb;background:#fff;border-radius:9px;padding:12px 15px;max-width:700px;margin:auto;text-align:center}.flow-step.done{border-left-color:#168575;background:#eefaf4}.flow-step.current{border:2px solid #d58a29;border-left:6px solid #d58a29;background:#fff8e9}.flow-step small{display:block;color:#64758b;margin-top:4px}.flow-arrow{text-align:center;color:#547a9c;font-size:22px;line-height:26px}.flow-branch{display:flex;gap:12px;justify-content:center;align-items:stretch;margin:8px auto;max-width:850px}.flow-decision{border:2px solid #b48b3a;background:#fff9e8;padding:12px 16px;transform:rotate(0deg);border-radius:16px;text-align:center;flex:1}.flow-path{flex:1;border:1px dashed #d9a2a2;background:#fff5f4;padding:11px;border-radius:9px;font-size:12px}.flow-path strong{color:#a54b39}.flow-group{background:#f5f8fc;border:1px solid #d8e2ee;border-radius:13px;padding:17px;margin:16px 0}.flow-group h3{margin:0 0 14px;color:#254a72}.flow-legend{display:flex;gap:15px;flex-wrap:wrap;font-size:12px}.flow-legend span{display:inline-flex;align-items:center;gap:6px}.flow-swatch{height:12px;width:12px;border-radius:3px;background:#6a96cb}.flow-swatch.done{background:#168575}.flow-swatch.current{background:#d58a29}@media(max-width:680px){.flow-branch{flex-direction:column}}
+.report-project-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:22px;row-gap:20px;align-items:start}.report-field{min-width:0;overflow-wrap:anywhere;font-size:13px}.report-field strong{display:block;margin-bottom:5px;font-size:13px}.report-picture-field{grid-column:3;grid-row:3 / span 2}.report-part-picture{display:block;width:100%;max-width:200px;height:125px;object-fit:contain;border:1px solid #dce5ef;border-radius:6px;background:white}.report-project-card h2{margin-bottom:24px}@media print{.report-project-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}.report-picture-field{grid-column:3!important;grid-row:3 / span 2!important}.report-project-card{break-inside:avoid!important}}
+.queued-file{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:6px 8px;margin:4px 0;border:1px solid #d9e2eb;border-radius:6px}.queued-file span{overflow-wrap:anywhere;min-width:0}.attachment-manage-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:7px 0;border-bottom:1px solid #e1e6eb}.attachment-manage-row a{margin-right:auto;overflow-wrap:anywhere}.attachment-manage-row button{padding:5px 10px}
+
+/* V84: consistent compact controls and professional local-demo sign-in */
+button,.btn{display:inline-flex!important;align-items:center;justify-content:center;gap:5px;vertical-align:middle;line-height:1.25;min-height:32px;padding:6px 11px;white-space:normal;text-align:center}
+.actions{align-items:center}.actions>button{align-self:center}td button,.task button{vertical-align:middle}
+.login-screen{position:fixed;inset:0;z-index:99999;background:linear-gradient(130deg,#0b2542,#19456b 55%,#e7eef6 55%);display:flex;align-items:center;justify-content:center;padding:20px}
+.login-card{width:min(430px,100%);background:#fff;border-radius:15px;box-shadow:0 24px 70px #07192d55;padding:30px 32px;color:#1b2e44}
+.login-brand{display:flex;align-items:center;gap:13px;margin-bottom:23px}.login-mark{display:grid;place-items:center;width:52px;height:52px;background:#103c63;color:white;border-radius:11px;font-size:20px;font-weight:800}
+.login-card h2{margin:0 0 5px;font-size:23px}.login-card p{margin:0 0 20px;color:#62748a;font-size:13px}.login-card label{display:block;font-size:12px;font-weight:650;margin:13px 0 6px}.login-card select,.login-card input{width:100%;height:41px;box-sizing:border-box}
+.login-password{display:flex;gap:7px}.login-password input{flex:1;min-width:0}.login-card .login-submit{width:100%;margin-top:18px;min-height:42px}.login-error{color:#a53224;font-size:12px;margin-top:9px;min-height:16px}.login-foot{font-size:11px;color:#708196;border-top:1px solid #e1e8f0;margin-top:18px;padding-top:13px}
+@media(max-width:650px){.login-card{padding:22px}}
+@media print{.login-screen{display:none!important}}
+
+.plan-drag-handle{display:inline-flex;align-items:center;justify-content:center;cursor:grab;user-select:none;min-width:30px;height:32px;border:1px solid #ccd7e5;border-radius:6px;background:#f5f8fc;color:#244a70;font-size:20px}.plan-drag-handle:active{cursor:grabbing}.plan-dragging{opacity:.65;background:#e7f2ff!important}.plan-body td:first-child{width:42px;text-align:center}
+
+/* Drag indicator: rows do not move until mouse release. */
+.plan-body .plan-row{transition:background-color .12s ease}
+.plan-body .plan-row.plan-dragging{opacity:.48;outline:1px dashed #377cb8;background:#eaf3fc!important}
+.plan-body .plan-row.plan-drop-before{box-shadow:inset 0 4px 0 #1478c7;background:#eff7ff}
+.plan-body .plan-row.plan-drop-after{box-shadow:inset 0 -4px 0 #1478c7;background:#eff7ff}
+.plan-drag-handle{cursor:grab;touch-action:none}
+</style>
+<style id="pdf-print-style">
+@media print {
+@page {size: A4 landscape; margin: 12mm;}
+body {background:white!important;color:#111!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:10px;}
+.app {display:block!important;} .side,.top .actions,button,input,select,textarea,.actions {display:none!important;}
+.main {max-width:100%!important;width:100%!important;padding:0!important;margin:0!important;}
+.top {display:block!important;margin-bottom:12px!important;}
+#pageTitle {color:#111!important;} #content {width:100%!important;overflow:visible!important;}
+.card {box-shadow:none!important;break-inside:avoid-page;border:1px solid #bbb!important;}
+table {width:100%!important;font-size:9px!important;} tr {break-inside:avoid;}
+#ganttArea {overflow:visible!important;max-width:none!important;}
+#pdfPrintHeading {display:block!important;margin-bottom:14px;border-bottom:2px solid #345;padding-bottom:8px;}
+}
+</style>
+<style>
+.task-update-btn{margin-left:auto;float:right;padding:6px 16px;font-size:13px;background:#13558a;color:white;border:0;border-radius:6px;cursor:pointer}
+.task-overlay{position:fixed;inset:0;z-index:9999;background:rgba(15,30,50,.55);display:flex;align-items:center;justify-content:center;padding:20px}
+.task-modal{width:min(1440px,98vw);max-height:92vh;overflow:auto;background:#fff;border-radius:12px;padding:20px 24px;box-shadow:0 18px 60px #0004}
+.task-modal .sectionTitle{position:sticky;top:-20px;background:#fff;z-index:2;padding:8px 0 16px}
+.task-modal-content{padding-bottom:16px}
+/* Give editable subtask names and remarks comfortable widths. */
+.task-modal #subtaskList .tablewrap{width:100%;overflow-x:auto}
+.task-modal #subtaskList table{min-width:1100px;table-layout:fixed}
+.task-modal #subtaskList th:nth-child(1){width:4%}
+.task-modal #subtaskList th:nth-child(2){width:20%}
+.task-modal #subtaskList th:nth-child(3),.task-modal #subtaskList th:nth-child(4){width:12%}
+.task-modal #subtaskList th:nth-child(5){width:20%}
+.task-modal #subtaskList th:nth-child(6){width:22%}
+.task-modal #subtaskList th:nth-child(7){width:10%}
+.task-modal #subtaskList td{white-space:normal;overflow-wrap:anywhere}
+.task-modal #subtaskList input{min-width:0;width:100%}
+@media(max-width:700px){.task-modal{width:98vw;padding:16px}}
+
+</style>
+<style id="compact-layout-v76">
+/* Compact screen-only spacing; keep printable reports unchanged. */
+@media screen {
+ .main{padding:15px 18px}
+ .top{margin-bottom:12px;gap:8px}
+ .top h1{font-size:23px}
+ .side{padding:12px 9px}
+ .brand{padding:7px 9px 13px}
+ .nav{padding:9px 10px;margin:1px 0}
+ .card{padding:13px 15px;margin-bottom:10px;border-radius:10px}
+ .kpis{gap:9px}
+ .kpi strong{font-size:24px}
+ .grid2,.grid3{gap:9px}
+ .field{margin-bottom:8px}
+ label{margin-bottom:3px}
+ input,select,textarea{padding:7px 9px}
+ textarea{min-height:60px}
+ button{padding:7px 11px}
+ th,td{padding:8px 9px}
+ .sectionTitle h2{margin:6px 0;font-size:16px}
+ .task{padding:9px 11px;margin:5px 0}
+ .task p{margin:7px 0}
+ .note{padding:9px 11px;margin:8px 0}
+ .legend{margin:7px 0;gap:12px}
+ .audit{padding:6px}
+ .part-thumb{height:48px;width:54px}
+ .part-cell{gap:8px}
+ .part-preview{height:90px;width:115px}
+ .flow-step{padding:9px 12px}
+ .flow-arrow{line-height:20px;font-size:18px}
+ .flow-group{padding:12px;margin:10px 0}
+ .flow-group h3{margin-bottom:9px}
+ .grow{min-height:54px}
+ .gname{padding:6px}
+ .grow .gname{padding:7px}
+ .attachment-manage-row{padding:5px 0}
+ .queued-file{padding:5px 7px;margin:3px 0}
+ .pdf-dialog{padding:17px}
+ .pdf-dialog .field{padding:7px 0}
+}
+@media screen and (max-width:900px){.main{padding:12px}.card{padding:11px}}
+</style><style id="compact-layout-v77">
+/* Screen-only density refinement: popup forms and project pages. */
+@media screen {
+ .main{padding:10px 13px}
+ .top{margin-bottom:7px;gap:6px}
+ .top h1{font-size:21px}
+ .card{padding:10px 12px;margin-bottom:7px}
+ .card h2,.card h3{margin-top:4px;margin-bottom:7px}
+ .card p{margin-top:5px;margin-bottom:7px}
+ .kpis,.grid2,.grid3{gap:7px}
+ .field{margin-bottom:5px}
+ label{margin-bottom:2px;line-height:1.25}
+ input,select,textarea{padding:5px 8px;border-radius:5px}
+ input:not([type=file]),select{min-height:31px}
+ input[type=file]{padding:4px 7px;min-height:31px}
+ textarea{min-height:46px;resize:vertical}
+ button{padding:6px 10px}
+ th,td{padding:6px 8px}
+ .sectionTitle{gap:7px}
+ .sectionTitle h2,.sectionTitle h3{margin:4px 0}
+ .task{padding:7px 9px;margin:4px 0}
+ .task p{margin:5px 0}
+ .note{padding:7px 9px;margin:5px 0}
+ .legend{margin:5px 0;gap:8px}
+ .audit{padding:4px 6px}
+ .actions{gap:5px}
+ .flow-step{padding:7px 10px}
+ .flow-group{padding:9px;margin:7px 0}
+ .flow-group h3{margin-bottom:6px}
+ .flow-arrow{line-height:17px}
+ .nav{padding:7px 9px;margin:0}
+ .side{padding:9px 7px}
+ .brand{padding:5px 7px 9px}
+ .queued-file{padding:4px 6px;margin:2px 0}
+ .attachment-manage-row{padding:3px 0;gap:6px}
+ .task-overlay{padding:8px;align-items:center}
+ .task-modal{width:min(1500px,99vw);max-height:97vh;padding:11px 15px;border-radius:9px}
+ .task-modal .sectionTitle{top:-11px;padding:3px 0 7px}
+ .task-modal .sectionTitle h2,.task-modal .sectionTitle h3{margin:3px 0;font-size:16px}
+ .task-modal .card{padding:9px 11px;margin-bottom:7px}
+ .task-modal .card h3{margin:3px 0 7px}
+ .task-modal .field{margin-bottom:5px}
+ .task-modal label{margin-bottom:2px}
+ .task-modal .grid2,.task-modal .grid3{gap:7px}
+ .task-modal .note{margin:4px 0;padding:6px 9px}
+ .task-modal p{margin:4px 0 7px}
+ .task-modal textarea{min-height:46px}
+ .task-modal button{padding:5px 9px}
+ .task-modal th,.task-modal td{padding:5px 7px}
+ .task-modal .task-modal-content{padding-bottom:4px}
+ .task-modal #subtaskList table{min-width:1000px;width:100%;table-layout:fixed}
+ .task-modal #subtaskList th:nth-child(1){width:3%}
+ .task-modal #subtaskList th:nth-child(2){width:21%}
+ .task-modal #subtaskList th:nth-child(3),.task-modal #subtaskList th:nth-child(4){width:11%}
+ .task-modal #subtaskList th:nth-child(5){width:20%}
+ .task-modal #subtaskList th:nth-child(6){width:24%}
+ .task-modal #subtaskList th:nth-child(7){width:10%}
+ .task-modal #subtaskList input{width:100%;min-width:0;padding:5px 6px}
+ .task-modal #subtaskList td{vertical-align:middle}
+ .task-modal #subtaskList .actions{gap:4px}
+ .task-modal .scroll{max-height:210px}
+ .pdf-dialog{padding:12px 14px}
+ .pdf-dialog .field{padding:4px 0}
+}
+@media screen and (max-width:750px){
+ .task-modal{width:99vw;padding:9px 10px}
+ .task-modal #subtaskList .tablewrap{overflow-x:auto}
+ .grid2,.grid3{grid-template-columns:1fr}
+}
+</style><style id="compact-layout-v78">
+/* Compact activity update layout based on the three-column reference image. */
+@media screen and (min-width:1050px){
+ .task-modal-content.compact-activity-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(310px,.98fr) minmax(300px,1fr);grid-template-areas:
+ "required required required"
+ "owner planned remarks"
+ "evidence actual remarks"
+ "existing existing tasksave"
+ "subtasks subtasks history";
+ column-gap:13px;row-gap:7px;align-items:start}
+ .compact-activity-grid>.compact-required{grid-area:required}
+ .compact-activity-grid>.compact-owner{grid-area:owner}
+ .compact-activity-grid>.compact-planned{grid-area:planned}
+ .compact-activity-grid>.compact-actual{grid-area:actual}
+ .compact-activity-grid>.compact-remarks{grid-area:remarks}
+ .compact-activity-grid>.compact-evidence{grid-area:evidence}
+ .compact-activity-grid>.compact-existing{grid-area:existing}
+ .compact-activity-grid>.compact-subtasks{grid-area:subtasks}
+ .compact-activity-grid>.compact-task-save{grid-area:tasksave}
+ .compact-activity-grid>.compact-history{grid-area:history}
+ .compact-activity-grid>.compact-plan-save{grid-area:planned;align-self:end;justify-self:end;margin-top:69px;z-index:1}
+ .compact-activity-grid>.compact-planned{padding-bottom:36px}
+ .compact-activity-grid>.compact-remarks textarea{min-height:136px;max-height:260px}
+ .compact-activity-grid>.compact-owner select{max-width:350px}
+ .compact-activity-grid>.compact-owner button{display:block;margin-top:5px}
+ .compact-activity-grid>.compact-task-save{display:flex;flex-direction:column;align-items:center;gap:8px;justify-content:center;padding-top:9px}
+ .compact-activity-grid>.compact-task-save button{width:auto;max-width:100%}
+ .compact-activity-grid>.compact-history{max-height:150px;overflow:auto}
+ .compact-activity-grid>.compact-evidence input[type=file]{max-width:100%}
+ .compact-activity-grid>.compact-existing,.compact-activity-grid>.compact-subtasks{margin:0}
+ .compact-activity-grid>.compact-required{margin:0}
+ .compact-activity-grid .grid2{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .compact-activity-grid .grid2 input[type=date]{width:100%;max-width:180px}
+}
+@media screen and (max-width:1049px){
+ .task-modal-content.compact-activity-grid{display:block}
+ .task-modal-content.compact-activity-grid>*{margin-bottom:7px}
+}
+@media screen{
+ .task-modal{max-height:98vh;padding:9px 12px}
+ .task-modal .card{padding:7px 9px;margin-bottom:5px}
+ .task-modal .sectionTitle{padding-bottom:5px}
+ .task-modal .field{margin-bottom:3px}
+ .task-modal label{margin-bottom:1px}
+ .task-modal .audit{padding:3px 5px}
+ .task-modal .evidence-preview{margin-top:3px}
+ .task-modal .queued-file{padding:3px 5px}
+ .task-modal p{margin:3px 0 5px}
+ .main .card{margin-bottom:6px}
+ .main .card h2,.main .card h3{margin-bottom:5px}
+ .main .note{margin:4px 0}
+ .main th,.main td{padding:5px 7px}
+ .main .field{margin-bottom:4px}
+ .main .grid2,.main .grid3{gap:6px}
+}
+</style><style id="compact-subtask-v79">
+/* Denser subtask editor; keep all attachment queue controls functional. */
+@media screen {
+ #subtaskForm.compact-subtask-form{margin-top:5px!important}
+ #subtaskForm .subtask-instructions{margin:0 0 5px;font-size:11px}
+ #subtaskForm .subtask-fields{display:grid;grid-template-columns:minmax(190px,1fr) minmax(190px,1fr) minmax(240px,1.15fr);grid-template-areas:"name remarks remarks" "start end files";gap:5px 11px;align-items:start}
+ #subtaskForm .subtask-name-field{grid-area:name}
+ #subtaskForm .subtask-remarks-field{grid-area:remarks}
+ #subtaskForm .subtask-start-field{grid-area:start}
+ #subtaskForm .subtask-end-field{grid-area:end}
+ #subtaskForm .subtask-files-field{grid-area:files}
+ #subtaskForm .field{margin:0;min-width:0}
+ #subtaskForm label{display:block;margin:0 0 2px;font-size:11px;line-height:1.15}
+ #subtaskForm input{width:100%;min-width:0;min-height:29px;padding:4px 7px;font-size:12px}
+ #subtaskForm input[type=file]{padding:3px 5px}
+ #subtaskForm .subtask-save-actions{margin-top:5px;gap:5px}
+ #subtaskForm .subtask-save-actions button{padding:5px 9px}
+ #subtaskForm #subtaskFilePreview{margin:3px 0 0;max-height:135px;overflow:auto}
+ #subtaskForm #subtaskFilePreview>p{margin:0 0 3px;font-size:10px;line-height:1.2}
+ #subtaskForm #subtaskFilePreview .queued-file{display:flex;align-items:center;justify-content:space-between;gap:6px;min-height:25px;padding:2px 5px;margin:2px 0;font-size:11px;line-height:1.2}
+ #subtaskForm #subtaskFilePreview .queued-file span{min-width:0;overflow-wrap:anywhere}
+ #subtaskForm #subtaskFilePreview .queued-file small{font-size:10px}
+ #subtaskForm #subtaskFilePreview .queued-file button{flex:none;min-width:23px;min-height:22px;padding:1px 5px;line-height:1;font-size:12px}
+}
+@media screen and (max-width:1000px){
+ #subtaskForm .subtask-fields{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"name remarks" "start end" "files files"}
+}
+@media screen and (max-width:550px){
+ #subtaskForm .subtask-fields{grid-template-columns:1fr;grid-template-areas:"name" "remarks" "start" "end" "files"}
+}
+</style>
+<style id="aligned-forms-v80">
+/* Consistent control metrics and aligned activity/subtask panels. Screen only. */
+@media screen {
+ .task-modal{width:min(1500px,99vw);padding:10px 13px}
+ .task-modal .field{min-width:0;margin-bottom:4px}
+ .task-modal .field>label,.task-modal label{font-size:11px;line-height:1.25;margin:0 0 3px;font-weight:600}
+ .task-modal input:not([type=checkbox]),.task-modal select,.task-modal textarea{
+   box-sizing:border-box;max-width:100%;border:1px solid #cbd6e1;border-radius:5px;
+   font-size:12px;line-height:1.3;padding:5px 8px;min-height:32px}
+ .task-modal input[type=date]{width:100%;min-width:0}
+ .task-modal input[type=file]{padding:4px 6px}
+ .task-modal button{font-size:12px;line-height:1.3;padding:6px 10px}
+ .task-modal .card{padding:8px 10px;margin:0 0 6px}
+ .task-modal .card h3{font-size:15px;margin:0 0 5px}
+ .task-modal .sectionTitle{margin-bottom:4px}
+ .task-modal .sectionTitle h2{font-size:16px}
+ .task-modal .sectionTitle h3{font-size:15px}
+ .task-modal .muted{line-height:1.35}
+ .task-modal .queued-file{min-height:26px;padding:3px 6px;margin:2px 0;font-size:11px}
+ .task-modal .queued-file button{min-width:25px;padding:3px 6px}
+ .task-modal #subtaskForm .subtask-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:'name remarks' 'start end' 'files files';gap:5px 9px;align-items:start}
+ .task-modal #subtaskForm .subtask-remarks-field input{width:100%}
+ .task-modal #subtaskForm .subtask-start-field input,.task-modal #subtaskForm .subtask-end-field input{width:100%;max-width:190px}
+ .task-modal #subtaskForm #subtaskFilePreview{max-height:90px;overflow-y:auto}
+ .task-modal #subtaskForm #subtaskFilePreview .queued-file{min-height:24px;padding:2px 5px}
+ .task-modal #subtaskList table{table-layout:fixed;min-width:1040px}
+ .task-modal #subtaskList th:nth-child(2){width:22%}
+ .task-modal #subtaskList th:nth-child(5){width:22%}
+ .task-modal #subtaskList th:nth-child(6){width:20%}
+ .task-modal #subtaskList td{vertical-align:middle}
+ .task-modal #subtaskList input{width:100%;min-width:0}
+}
+@media screen and (min-width:1050px){
+ .task-modal-content.compact-activity-grid{display:grid;
+   grid-template-columns:minmax(0,1.08fr) minmax(0,.98fr) minmax(0,1fr);
+   grid-template-areas:'required required required' 'owner planned remarks' 'evidence actual remarks' 'existing existing tasksave' 'subtasks subtasks history';
+   column-gap:11px;row-gap:5px;align-items:start}
+ .compact-activity-grid>.compact-owner,.compact-activity-grid>.compact-planned,
+ .compact-activity-grid>.compact-actual,.compact-activity-grid>.compact-evidence,
+ .compact-activity-grid>.compact-remarks{min-width:0}
+ .compact-activity-grid>.compact-owner select{width:100%;max-width:350px}
+ .compact-activity-grid>.compact-planned{padding-bottom:0!important}
+ .compact-activity-grid>.compact-plan-save{position:static;grid-area:planned;justify-self:end;align-self:end;margin:0!important;transform:translateY(33px)}
+ .compact-activity-grid .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ .compact-activity-grid .grid2 input[type=date]{max-width:185px}
+ .compact-activity-grid>.compact-remarks textarea{min-height:114px;max-height:210px;width:100%}
+ .compact-activity-grid>.compact-existing,.compact-activity-grid>.compact-subtasks{width:100%;min-width:0}
+ .compact-activity-grid>.compact-task-save{display:flex;align-items:center;justify-content:flex-start;gap:7px;padding:7px 0}
+ .compact-activity-grid>.compact-history{max-height:130px;overflow:auto}
+}
+@media screen and (max-width:1049px){
+ .task-modal #subtaskForm .subtask-fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media screen and (max-width:550px){
+ .task-modal #subtaskForm .subtask-fields{grid-template-columns:1fr;grid-template-areas:'name' 'remarks' 'start' 'end' 'files'}
+ .task-modal #subtaskForm .subtask-start-field input,.task-modal #subtaskForm .subtask-end-field input{max-width:100%}
+}
+</style>
+<style id="alignment-v81">
+@media screen and (min-width:1050px){
+ .task-modal-content.compact-activity-grid{grid-template-areas:"required required required" "owner planned remarks" "evidence actual remarks" "existing existing tasksave" "subtasks subtasks history"}
+ .compact-activity-grid>.compact-owner select,.compact-activity-grid>.compact-evidence input[type=file]{width:100%;max-width:350px}
+ .compact-activity-grid>.compact-planned{padding-bottom:0}
+}
+@media screen and (min-width:700px){
+ #subtaskForm .subtask-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"name name" "start end" "remarks remarks";gap:5px 12px}
+ #subtaskForm .subtask-start-field input,#subtaskForm .subtask-end-field input{width:100%;max-width:180px}
+ #subtaskForm .subtask-remarks-field input{width:100%}
+ #subtaskForm .subtask-files-field{grid-area:auto;max-width:350px;margin-top:5px}
+}
+@media screen and (max-width:699px){#subtaskForm .subtask-fields{grid-template-columns:1fr;grid-template-areas:"name" "start" "end" "remarks"}}
+</style><style id="subtask-alignment-v82">
+/* Match the compact activity layout: name + two date fields on one row,
+   full-width resizable remarks underneath, attachments below remarks. */
+@media screen and (min-width:900px){
+ #subtaskForm .subtask-fields{display:grid!important;grid-template-columns:minmax(230px,2.2fr) minmax(150px,1fr) minmax(150px,1fr)!important;grid-template-areas:"name start end" "remarks remarks remarks"!important;gap:6px 12px!important;align-items:start}
+ #subtaskForm .subtask-name-field{grid-area:name!important}
+ #subtaskForm .subtask-start-field{grid-area:start!important}
+ #subtaskForm .subtask-end-field{grid-area:end!important}
+ #subtaskForm .subtask-remarks-field{grid-area:remarks!important}
+ #subtaskForm .subtask-start-field input,#subtaskForm .subtask-end-field input{width:100%!important;max-width:none!important}
+}
+@media screen and (min-width:600px) and (max-width:899px){
+ #subtaskForm .subtask-fields{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-areas:"name name" "start end" "remarks remarks"!important;gap:6px 10px!important}
+}
+@media screen and (max-width:599px){
+ #subtaskForm .subtask-fields{display:grid!important;grid-template-columns:1fr!important;grid-template-areas:"name" "start" "end" "remarks"!important;gap:5px!important}
+}
+#subtaskForm .subtask-remarks-field textarea{display:block;width:100%!important;min-width:0;min-height:68px;height:76px;max-height:none;resize:vertical;box-sizing:border-box;font:inherit;line-height:1.35;padding:7px 9px;border:1px solid #c7d5e5;border-radius:6px;background:white;color:inherit}
+#subtaskForm .subtask-files-field{max-width:none!important;width:100%!important;margin-top:6px!important}
+#subtaskForm .subtask-files-field input[type=file]{width:100%;box-sizing:border-box}
+#subtaskForm .subtask-save-actions{margin-top:6px!important}
+#subtaskForm .field{min-width:0}
+</style><style id="completed-compact-v83">
+/* Match the main activity's compact, aligned popup layout. */
+.task-modal .completed-activity-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"note note" "date remarks" "evidence remarks" "save history";gap:8px 14px;align-items:start;padding:12px}
+.task-modal .completed-activity-card>.completed-note{grid-area:note;margin:0;padding:7px 10px}
+.task-modal .completed-activity-card>.completed-date{grid-area:date;min-width:0;margin:0}
+.task-modal .completed-activity-card>.completed-date input{width:100%;max-width:190px}
+.task-modal .completed-activity-card>.completed-remarks{grid-area:remarks;min-width:0;margin:0}
+.task-modal .completed-activity-card>.completed-remarks textarea{width:100%;min-height:105px;resize:vertical;max-height:300px}
+.task-modal .completed-activity-card>.completed-evidence{grid-area:evidence;min-width:0;margin:0}
+.task-modal .completed-activity-card>.completed-evidence input[type=file]{width:100%;max-width:350px}
+.task-modal .completed-activity-card>.completed-evidence .file-preview{max-height:120px;overflow:auto}
+.task-modal .completed-activity-card>.completed-save{grid-area:save;justify-self:start;align-self:start;margin:0}
+.task-modal .completed-activity-card>.completed-history{grid-area:history;max-height:95px;overflow:auto;margin:0}
+.task-modal .completed-activity-card .field label{margin-bottom:3px}
+.task-modal .completed-activity-card .queued-file{padding:2px 6px;min-height:25px}
+.task-modal .completed-activity-card + .card{margin-top:8px}
+@media(max-width:700px){.task-modal .completed-activity-card{grid-template-columns:minmax(0,1fr);grid-template-areas:"note" "date" "remarks" "evidence" "save" "history"}.task-modal .completed-activity-card>.completed-date input{max-width:100%}}
+</style>
+<style id="v85-ui-adjustments">
+/* V85: restore left-aligned navigation; normalize action controls without changing page layout */
+.side .nav{display:flex!important;width:100%;justify-content:flex-start!important;align-items:center!important;text-align:left!important;padding-left:11px!important;min-height:32px;white-space:normal}
+.sectionTitle>.actions,.sectionTitle>button,.sectionTitle .actions button{align-self:center;vertical-align:middle}
+.sectionTitle>button,.sectionTitle>.actions button,.tablewrap td .actions button{display:inline-flex!important;align-items:center!important;justify-content:center!important;line-height:1.15!important;min-height:32px!important;padding:6px 10px!important;margin-top:0!important;margin-bottom:0!important}
+.sectionTitle{align-items:center!important}.sectionTitle>.actions{margin:0!important}
+.part-thumb-image{cursor:zoom-in;transition:box-shadow .15s ease,transform .15s ease}
+.part-thumb-image:hover{box-shadow:0 0 0 2px #6c9dca;transform:scale(1.03)}
+.picture-lightbox{position:fixed;inset:0;z-index:110000;background:rgba(8,25,43,.78);display:flex;align-items:center;justify-content:center;padding:24px}
+.picture-lightbox-panel{position:relative;background:white;border-radius:12px;padding:42px 18px 16px;max-width:min(900px,95vw);max-height:94vh;display:flex;flex-direction:column;gap:10px;box-shadow:0 20px 70px #07192d88}
+.picture-lightbox-panel img{display:block;max-width:100%;max-height:calc(94vh - 105px);object-fit:contain;margin:auto}
+.picture-lightbox-panel .picture-close{position:absolute;right:12px;top:10px}
+.picture-lightbox-panel .picture-caption{font-size:13px;color:#40536a;text-align:center;overflow-wrap:anywhere}
+@media(max-width:620px){.side .nav{display:inline-flex!important;width:auto!important}.picture-lightbox{padding:10px}}
+</style><style id="v86-visual-polish">
+/* Larger, viewport-filling image viewer, with a narrow frame. */
+.picture-lightbox{padding:8px!important}
+.picture-lightbox-panel{width:min(820px,calc(100vw - 48px))!important;max-width:calc(100vw - 48px)!important;height:auto;max-height:calc(85dvh - 24px)!important;padding:44px 12px 12px!important;gap:4px!important}
+.picture-lightbox-panel img{width:auto;height:auto;min-height:0;max-height:calc(75dvh - 90px)!important;max-width:100%;object-fit:contain;flex:0 1 auto}
+.picture-lightbox-panel .picture-caption{flex:none;padding:2px 0}
+/* Three-column activity header: heading left, legend vertically centered, action right. */
+.activity-section-header{min-height:40px!important;align-items:center!important;gap:10px!important}
+.activity-section-header>h2{align-self:center!important;line-height:1.35!important;margin:0!important}
+.activity-section-header>.legend{display:flex!important;align-self:center!important;align-items:center!important;justify-content:center!important;min-height:34px!important;gap:8px!important;margin:0!important;padding:0!important}
+.activity-section-header>.legend>.pill{display:inline-flex!important;align-items:center!important;justify-content:center!important;line-height:1.2!important;margin:0!important;vertical-align:middle!important}
+.activity-section-header>.actions{display:flex!important;align-items:center!important;align-self:center!important;justify-content:flex-end!important;margin:0!important;min-height:34px!important}
+.activity-section-header>.actions>button{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:34px!important;margin:0!important;line-height:1.2!important}
+@media(max-width:850px){.activity-section-header{grid-template-columns:1fr!important;justify-items:stretch}.activity-section-header>.legend{justify-content:flex-start!important}.activity-section-header>.actions{justify-content:flex-start!important}}
+.notice-grid{display:grid;grid-template-columns:1fr;gap:0;margin-top:12px;border-top:1px solid #e5ebf2}.notice-row{display:grid;grid-template-columns:minmax(145px,27%) 1fr;gap:12px;padding:8px 2px;border-bottom:1px solid #eef2f6;align-items:start}.notice-row span{color:#64748b;font-size:12px}.notice-row strong{font-size:13px;font-weight:500;overflow-wrap:anywhere;white-space:pre-wrap}@media(max-width:560px){.notice-row{grid-template-columns:1fr;gap:3px}}
+</style></head><body><div id="loginScreen" class="login-screen"><form id="loginForm" class="login-card" onsubmit="return loginSubmit(event)"><div class="login-brand"><div class="login-mark">AHTL</div><div><strong>Project Management Portal</strong><div style="font-size:12px;color:#64748b">Authorized user access</div></div></div><h2>Sign in</h2><p>Select your department or role and enter its password.</p><label for="loginRole">User / Department</label><select id="loginRole" required></select><label for="loginPassword">Password</label><div class="login-password"><input id="loginPassword" type="password" autocomplete="current-password" placeholder="Enter password"><button class="secondary" type="button" onclick="toggleLoginPassword()" id="loginShow">Show</button></div><div id="loginError" class="login-error" role="alert"></div><button class="login-submit" type="submit">Sign in</button><div class="login-foot">Local prototype: passwords are stored in this browser. This screen is not secure server-side authentication. Configure role passwords in Role Settings before operational use.</div></form></div><div class="app"><aside class="side"><div class="brand">AHTL <small>Project Management Portal</small></div><div id="navigation"></div><p class="small" style="padding:15px;color:#b5c7da">Local demo only. Email notifications require manual sending; passcodes are not secure access control.</p></aside><main class="main"><div class="top"><div><h1 id="pageTitle">Dashboard</h1><span class="muted">New / Localized / Resourced Part Development</span></div><div class="actions"><button class="secondary" onclick="exportPDF()" title="Choose dashboard or individual project PDF report">Export PDF</button><span class="muted" id="signedInRole" style="font-size:12px"></span><button type="button" class="secondary" onclick="logoutPortal()">Sign out</button><select id="role" style="width:165px;display:none" aria-label="Active role"></select></div></div><div id="pdfPrintHeading" style="display:none"><strong>AHTL — Product Localization & Resourcing Portal</strong><div id="pdfPrintMeta"></div></div><div id="content"></div></main></div>
+<script>
+'use strict';
+const steps=[
+['Drawing / RFQ Receipt','E&P',3,'Drawing, specifications, RFQ'],['Drawing Study & Design Review','E&P',5,'Drawing review, query log'],['Feasibility Study','E&P',7,'Feasibility report and approval'],['RFQ, Costing & Negotiation','SCM',7,'Supplier quotation and negotiation'],['LOI / Sourcing Commitment','E&P',3,'Signed LOI or sourcing commitment'],['APQP / Project Timing Chart','E&P',3,'Project plan and timing chart'],['Product & Process Development','E&P',10,'Process flow, PFMEA, control plan'],['Tooling / Gauge Development','E&P',25,'Tooling records and tryout'],['Trial Production & Initial Inspection','Quality',8,'Trial inspection report, MTC, PQCT'],['Material Qualification','Quality',5,'Material certificates and qualification'],['Gauge Approval & PQCT','Quality',5,'Gauge, calibration and PQCT approval'],['Trial / Pilot Lot','Production',8,'Pilot lot report'],['Assembly Trial & Fitment','Production',6,'Assembly trial and fitment approval'],['Performance / Reliability Tests','Quality',10,'Performance test report'],['Denso / Customer Evaluation','E&P',12,'Customer evaluation and approval'],['Supplier QAV / Process Audit','Quality',7,'QAV report and closure'],['Process Capability & Trial Run','Production',7,'Capability and trial-run records'],['Customer IPP / PPAP','Quality',12,'IPP / PPAP customer approval'],['Mass Production Release / SOP','E&P',3,'Mass production authorization'],['Ramp-up / Nigori','SCM',14,'Ramp-up plan and early production results'],['Project Closure & Lessons Learned','E&P',3,'Closure report and lessons learned']];
+const KEY='ahtl_portal_v1';const initial=()=>({projects:[],changes:[],audit:[],workflow:steps.map((s,i)=>({id:i+1,name:s[0],owner:s[1],duration:s[2],evidence:s[3]})),version:1});let db=initial();let serverRevision=0,serverToken='',serverReady=false,serverSaving=Promise.resolve();let tab='Dashboard',selected=null,scale='week',dashboardYear='all',portfolioSelection=null,myTasksProject='all';const $=id=>document.getElementById(id);const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const today=()=>new Date().toISOString().slice(0,10);const day=d=>new Date(d+'T12:00:00');const add=(d,n)=>{let x=day(d);x.setDate(x.getDate()+n);return x.toISOString().slice(0,10)};const diff=(a,b)=>Math.round((day(b)-day(a))/86400000);const role=()=> $('role').value;let allRoles=Array.isArray(db.roles)&&db.roles.length?db.roles:['EP','Approver','Quality','Production','SCM','PPC'];db.directory??=Object.fromEntries(allRoles.map(r=>[r,{email:'',passcode:''}]));db.notifications??=[];db.roles=allRoles;db.roleLabels??={};let authorizedRole='EP', projectEditView=false;const save=()=>{if(!serverReady)return;const snapshot=JSON.parse(JSON.stringify(db));serverSaving=serverSaving.then(async()=>{const response=await fetch('/api/state',{method:'PUT',headers:{'Content-Type':'application/json','Authorization':'Bearer '+serverToken},body:JSON.stringify({revision:serverRevision,data:snapshot})});if(response.status===409){serverReady=false;alert('Another user has updated the portal. Reload to see their changes. Your changes were not saved.');return;}if(!response.ok){serverReady=false;alert('Server save failed. Reload and sign in again.');return;}serverRevision=(await response.json()).revision;}).catch(()=>{serverReady=false;alert('Connection lost. Changes could not be saved. Reload when connected.');});};const log=(action,project='')=>{db.audit.unshift({date:new Date().toLocaleString(),who:role(),action,project});db.notifications.unshift({id:'N-'+Date.now()+'-'+Math.random().toString(36).slice(2,6),date:new Date().toLocaleString(),who:role(),project,action,recipients:allRoles.filter(r=>db.directory[r]?.email).map(r=>db.directory[r].email),sent:false});save()};const visibleProjects=()=>db.projects.filter(p=>p.approval!=='Rejected'&&!p.deleted);const find=id=>visibleProjects().find(p=>p.id===id);const done=t=>t.status==='Completed';const approved=p=>p.approval==='Approved';const pct=p=>Math.round(p.tasks.filter(done).length/Math.max(1,p.tasks.length)*100);const first=p=>p.tasks.find(t=>!done(t));const status=p=>{if(!approved(p))return 'Pending';if(p.tasks.every(done))return 'Completed';let t=first(p);return t&&t.planEnd<today()?'Delayed':'Active'};const activityState=(p,i)=>{let t=p.tasks[i];if(done(t))return 'Completed';if(!approved(p))return 'Upcoming';if(t.status==='In Progress'||t.actualStart)return 'In Progress';if(t.planEnd&&t.planEnd<today())return 'Delayed';return 'Upcoming'};const taskStatus=(p,i)=>{let t=p.tasks[i];return done(t)?'Completed':i>0&&!done(p.tasks[i-1])?'Locked':activityState(p,i)};const navs=['Dashboard','My Tasks','Approvals','General Workflow','Role Settings','Notifications','Audit & Data'];
+syncRoleSelector();$('role').disabled=true;function reconcileActiveActivities(){let changed=false;for(const p of db.projects){if(!approved(p))continue;for(let i=1;i<p.tasks.length;i++){const prev=p.tasks[i-1],t=p.tasks[i];if(done(prev)&&!done(t)&&!t.actualStart&&t.status!=='In Progress'){t.actualStart=prev.actualEnd||today();t.status='In Progress';t.trials??=[];t.trials.push({date:new Date().toLocaleString(),who:'System',note:'Activity initiated automatically after preceding activity completion (reconciled)',files:[]});changed=true}if(!done(prev))break;}}if(changed)save()}
+let loggedIn=false;
+function loginInit(){const list=$('loginRole');if(!list)return;list.innerHTML=allRoles.map(r=>`<option value="${esc(r)}">${esc(roleLabel(r))}</option>`).join('');list.value='EP';$('loginScreen').style.display='flex';$('loginPassword').value='';$('loginError').textContent='';}
+function toggleLoginPassword(){const field=$('loginPassword'),show=field.type==='password';field.type=show?'text':'password';$('loginShow').textContent=show?'Hide':'Show';}
+async function loginSubmit(e){e.preventDefault();const r=$('loginRole').value,pass=$('loginPassword').value,err=$('loginError');err.textContent='';try{const auth=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({role:r,password:pass})});if(!auth.ok){err.textContent='Invalid credentials or server unavailable.';return false;}serverToken=(await auth.json()).token;const res=await fetch('/api/state',{headers:{Authorization:'Bearer '+serverToken}});if(!res.ok)throw Error('Could not load server data');const data=await res.json();db=data.data;serverRevision=data.revision;serverReady=true;allRoles=Array.isArray(db.roles)&&db.roles.length?db.roles:['EP','Approver','Quality','Production','SCM','PPC'];db.directory??={};db.notifications??=[];db.roles=allRoles;db.roleLabels??={};authorizedRole=r;loggedIn=true;$('loginScreen').style.display='none';render();}catch(ex){err.textContent=ex.message||'Server connection failed';}return false;}
+function logoutPortal(){serverReady=false;serverToken='';loggedIn=false;selected=null;projectEditView=false;tab='Dashboard';closeTaskUpdate();loginInit();}
+function roleLabel(r){return db.roleLabels?.[r]||(r==='EP'?'E&P Custodian':r==='Approver'?'Manager / Approver':r)}
+function passwordPrompt(message){
+ return new Promise(resolve=>{
+  const overlay=document.createElement('div');overlay.className='task-overlay';
+  overlay.innerHTML=`<div class="task-modal" role="dialog" aria-modal="true" aria-label="Password verification" style="width:min(430px,95vw)"><h3>Password verification</h3><p>${esc(message)}</p><div class="field"><label>Password</label><div style="display:flex;align-items:center;gap:8px"><input id="securePromptInput" type="password" autocomplete="off" style="flex:1;min-width:0"><button type="button" class="secondary" id="securePromptToggle">Show</button></div></div><div class="actions" style="justify-content:flex-end;margin-top:18px"><button type="button" class="secondary" id="securePromptCancel">Cancel</button><button type="button" id="securePromptConfirm">Confirm</button></div></div>`;
+  document.body.appendChild(overlay);
+  const input=overlay.querySelector('#securePromptInput');
+  const finish=value=>{document.removeEventListener('keydown',onKey,true);overlay.remove();resolve(value)};
+  const onKey=e=>{if(e.key==='Escape'){e.preventDefault();finish(null)}else if(e.key==='Enter'&&overlay.contains(document.activeElement)){e.preventDefault();finish(input.value)}};
+  document.addEventListener('keydown',onKey,true);
+  overlay.querySelector('#securePromptCancel').onclick=()=>finish(null);
+  overlay.querySelector('#securePromptConfirm').onclick=()=>finish(input.value);
+  overlay.querySelector('#securePromptToggle').onclick=e=>{const visible=input.type==='password';input.type=visible?'text':'password';e.currentTarget.textContent=visible?'Hide':'Show'};
+  input.focus();
+ });
+}
+function toggleRolePassword(i,button){const input=$('pin'+i);if(!input)return;const visible=input.type==='password';input.type=visible?'text':'password';button.textContent=visible?'Hide':'Show';button.setAttribute('aria-label',visible?'Hide password':'Show password')}
+function syncRoleSelector(){const el=$('role'),current=authorizedRole;if(!el)return;el.innerHTML=allRoles.map(r=>`<option value="${esc(r)}">${esc(roleLabel(r))}</option>`).join('');el.value=allRoles.includes(current)?current:'EP';}
+function render(){syncRoleSelector();if($('signedInRole'))$('signedInRole').textContent=roleLabel(authorizedRole);reconcileActiveActivities();if(taskModalSource)closeTaskUpdate(); $('navigation').innerHTML=navs.filter(n=>n!=='Approvals'||['EP','Approver'].includes(role())).map(n=>`<button class="nav ${tab===n?'active':''}" onclick="navigate('${n}')">${esc(n)}${n==='Approvals'&&visibleProjects().filter(p=>p.approval==='Pending').length?' ('+visibleProjects().filter(p=>p.approval==='Pending').length+')':''}</button>`).join('');$('pageTitle').textContent=tab;let html=tab==='Dashboard'?dashboard():tab==='My Tasks'?myTasks():tab==='New Project'?newProject():tab==='Projects'?projects():tab==='Gantt Chart'?gantt():tab==='Process Flow'?processFlow():tab==='Project Library'?projectLibrary():tab==='Approvals'?approvals():tab==='General Workflow'?workflow():tab==='Role Settings'?roleSettings():tab==='Notifications'?notificationPage():auditPage();$('content').innerHTML=html;if(tab==='Projects'&&selected&&projectEditView&&find(selected))editProject(selected);if(tab==='New Project'){let f=$('content').querySelector('form');if(f)fillInitiationPlan(f)}}
+
+// Read-only visualization of the supplied localization flow workbook, aligned to SOP-PD-01.
+function processFlow(){
+ const groups=[
+ {title:'1. Initiation, drawing & commercial commitment',items:[
+ ['Start / Proto drawing & specification','Receiving drawing and sample; drawing study'],
+ ['Request for quotation','Quotation received; drawing discussion and quotation preparation'],
+ ['Feasibility study','Technical and commercial feasibility review'],
+ ['Price negotiation and finalization','LOI; purchase order; pre-deletion report'] ]},
+ {title:'2. Tooling and sample development',items:[
+ ['Material confirmation & mold making','Process setting, tooling development and preparation'],
+ ['Make samples — T1, T2, initial samples','With dispatch report'],
+ ['Receive samples and forward to QA','Sample receipt and inspection'],
+ ['Samples inspection & result sharing','Inspection report and feedback'] ],decision:'Sample inspection OK?',ng:'If NG → Mold modification for improved samples → Make samples (T1/T2) again'},
+ {title:'3. Assembly, performance and Denso evaluation',items:[
+ ['Assembly samples preparation','Assembly making for Denso'],
+ ['Assembly performance & inspection','Fitment and performance evaluation'],
+ ['Send assembly samples to Denso','Denso testing and evaluation'],
+ ['Denso approval','Evaluation result and approval record'] ],decision:'Denso evaluation OK?',ng:'If NG → corrective action / improved samples → repeat relevant assembly and evaluation steps'},
+ {title:'4. Trial lot and supplier qualification',items:[
+ ['Request trial lot from vendor','Supplier trial lot submission'],
+ ['Trial lot inspection','Supplier reports and sample inspection'],
+ ['QAV visit','Supplier process audit'],
+ ['PQCT, MTC and inspection report submission','Relevant quality documents and verification'] ],decision:'Trial lot and quality verification OK?',ng:'If NG → supplier correction and repeat trial lot / inspection'},
+ {title:'5. IPP and customer approval',items:[
+ ['Request IPP / IPP production','Production-intent parts'],
+ ['IPP incoming inspection','Inspection and documentation'],
+ ['IPP making / IPP inspection','IPP package preparation'],
+ ['IPP submission to Honda','Customer IPP evaluation'],
+ ['IPP evaluation & approval sharing','Drawing upgrade where required'],
+ ['IPP approval','Formal customer approval'] ],decision:'IPP approved?',ng:'If NG → drawing upgrade / corrective action → repeat applicable IPP steps'},
+ {title:'6. Mass production and close-out',items:[
+ ['MP lot / production release','Approved production supply'],
+ ['Supplier list, Nigori preparation and PO issuance','Ramp-up and production control'],
+ ['Deletion report','Existing supplier deletion after approved transfer'],
+ ['Part developed / End','Project close-out and archived evidence'] ]}
+ ];
+ const projectOpts=visibleProjects().map(p=>`<option value="${esc(p.id)}" ${selected===p.id?'selected':''}>${esc(p.name)} — ${esc(p.part||'—')}</option>`).join('');
+ const p=selected?find(selected):null;const completed=p?p.tasks.filter(done).length:0;
+ let out=`<div class="card flow-wrap"><div class="sectionTitle"><h2>Localization / Resourcing — Complete Process Flow</h2><div class="actions"><button class="secondary" onclick="backToDashboard()">← Back to Dashboard</button><button class="secondary" onclick="window.print()">Print Flow</button></div></div><p class="muted">Based on the uploaded localization process-flow workbook and SOP-PD-01. Decision branches show the required NG / rework loops. The diagram is a reference view; activity approvals and closure are managed from the project page.</p><div class="field"><label>Highlight project progress (optional)</label><select onchange="selected=this.value||null;render()"><option value="">Show standard process</option>${projectOpts}</select></div><div class="flow-legend"><span><i class="flow-swatch"></i> Standard step</span><span><i class="flow-swatch done"></i> Completed SOP stage</span><span><i class="flow-swatch current"></i> Current SOP stage</span></div><div class="flow-arrow">↓</div>`;
+ let n=0;
+ for(const g of groups){out+=`<section class="flow-group"><h3>${esc(g.title)}</h3>`;
+ for(const item of g.items){let cls='';if(p){const task=p.tasks[n];if(task)cls=done(task)?'done':n===completed?'current':'';}out+=`<div class="flow-step ${cls}"><strong>${esc(item[0])}</strong><small>${esc(item[1])}</small></div><div class="flow-arrow">↓</div>`;n++;}
+ if(g.decision)out+=`<div class="flow-branch"><div class="flow-decision"><b>◇ ${esc(g.decision)}</b><div class="muted">YES / OK ↓ Continue</div></div><div class="flow-path"><strong>NO / NG ↶ Rework loop</strong><div>${esc(g.ng)}</div></div></div><div class="flow-arrow">↓</div>`;
+ out+='</section>';
+ }
+ return out+`<div class="flow-step"><strong>END — Approved development and controlled project closure</strong></div><p class="muted" style="margin-top:16px">Note: Project highlighting is indicative only because the original flow diagram and the 21 controlled SOP activities use different levels of detail. A definitive node-to-activity mapping will be needed for precise status colors on every flowchart box.</p></div>`;
+}
+
+function backToDashboard(){tab='Dashboard';selected=null;projectEditView=false;render()}
+function navigate(n){if((n==='Approvals'||n==='New Project')&&!['EP','Approver'].includes(role())){tab='Dashboard';selected=null;render();return;}tab=n;selected=null;projectEditView=false;render()}
+function projectYear(p){return String(p.start||p.created||'').slice(0,4)}
+function selectPortfolioProject(id){portfolioSelection=portfolioSelection===id?null:id;render()}
+function latestActivityRemark(t){let trials=t.trials||[];for(let i=trials.length-1;i>=0;i--){let note=(trials[i].note||'').trim();if(note)return note}return '—'}
+function dashboard(){let years=[...new Set(visibleProjects().map(projectYear).filter(y=>/^\d{4}$/.test(y)))].sort((a,b)=>b.localeCompare(a));let filtered=visibleProjects().filter(p=>dashboardYear==='all'||projectYear(p)===dashboardYear);let active=filtered.filter(approved),late=active.filter(p=>status(p)==='Delayed'),pending=filtered.filter(p=>p.approval==='Pending');let chosen=filtered.find(p=>p.id===portfolioSelection);return `${role()==='Approver'?`<div class="card" style="border:2px solid #6998d6"><div class="sectionTitle"><h2>Initiation Approval Inbox — ${pending.length} Pending</h2><button onclick="navigate('Approvals')">Review & Approve Projects</button></div>${pending.length?pending.map(p=>`<p><b>${esc(p.name)}</b> (${esc(p.part)}) — Awaiting your approval</p>`).join(''):'<p class="muted">No project initiation requests awaiting approval.</p>'}</div>`:''}<div class="card"><div class="actions"><label for="dashboardYear" style="margin:0">Project start year</label><select id="dashboardYear" style="width:160px" onchange="dashboardYear=this.value;portfolioSelection=null;render()"><option value="all">Show All</option>${years.map(y=>`<option value="${y}" ${dashboardYear===y?'selected':''}>${y}</option>`).join('')}</select><span class="muted">${filtered.length} project(s) shown</span></div></div><div class="kpis">${[['Total Projects',filtered.length],['Active',active.filter(p=>status(p)==='Active').length],['Delayed',late.length],['Completed',active.filter(p=>status(p)==='Completed').length]].map(x=>`<div class="card kpi"><strong>${x[1]}</strong><span>${x[0]}</span></div>`).join('')}</div><div class="card"><div class="sectionTitle"><h2>Project Portfolio</h2>${['EP','Approver'].includes(role())?`<button onclick="navigate('New Project')">+ Initiate Project</button>`:''}</div><p class="muted">Click “View Activities” beside a project to display only that project's upcoming and overdue activities.</p>${projectTable(filtered)}</div>${chosen?`<div class="card"><div class="sectionTitle activity-section-header" style="display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:12px"><h2 style="margin:0">Upcoming / Overdue Activities — ${esc(chosen.name)}</h2><div class="legend" style="display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin:0"><span class="pill In-Progress">In Process</span><span class="pill Completed">Completed</span><span class="pill Upcoming">Upcoming</span><span class="pill Delayed">Delayed</span></div><div class="actions" style="justify-content:flex-end;margin:0">${['EP','Approver'].includes(role())?`<button class="secondary" onclick="editProjectActivities('${chosen.id}')">Edit Activity Plan (Add / Delete)</button>`:''}</div></div>${!approved(chosen)?'<p class="muted">This project is awaiting initiation approval.</p>':(()=>{let items=chosen.tasks;return items.length?`<div class="tablewrap"><table><tr><th>#</th><th>Activity</th><th>Responsible</th><th>Planned due</th><th>Actual completion</th><th>Remarks</th><th>Status</th><th>Action</th></tr>${items.map(t=>{let st=activityState(chosen,chosen.tasks.indexOf(t));return `<tr><td>${chosen.tasks.indexOf(t)+1}</td><td>${esc(t.name)}</td><td>${esc(t.owner)}</td><td>${esc(t.planEnd)}</td><td>${esc(t.actualEnd||"—")}</td><td class="activity-remarks">${esc(latestActivityRemark(t))}</td><td><span class="pill ${st.replace(/ /g,'-')}">${st}</span></td><td>${(done(t)?['EP','Approver'].includes(role()):taskStatus(chosen,chosen.tasks.indexOf(t))!=='Locked'&&['In Progress','Delayed'].includes(activityState(chosen,chosen.tasks.indexOf(t)))&&(['EP','Approver'].includes(role())||role()===normalizeOwner(t.owner)))?`<button onclick="openDashboardTaskUpdate('${chosen.id}',${chosen.tasks.indexOf(t)})">Update</button>`:''}</td></tr>`}).join('')}</table></div>`:'<p class="muted">No pending activities. All activities are completed.</p>'})()}</div>`:''}`}
+
+function myTasks(){
+ const r=role(),available=visibleProjects().filter(p=>p.tasks.some(t=>normalizeOwner(t.owner)===r));
+ if(myTasksProject!=='all'&&!available.some(p=>p.id===myTasksProject))myTasksProject='all';
+ const items=visibleProjects().filter(p=>myTasksProject==='all'||p.id===myTasksProject).flatMap(p=>p.tasks.map((t,i)=>({p,t,i})).filter(x=>normalizeOwner(x.t.owner)===r));
+ const counts={active:0,completed:0,upcoming:0,delayed:0};
+ items.forEach(({p,i})=>{const st=activityState(p,i);if(st==='Completed')counts.completed++;else if(st==='Delayed')counts.delayed++;else if(st==='In Progress')counts.active++;else counts.upcoming++});
+ return `<div class="card"><div class="sectionTitle"><h2>My Tasks — ${r==='EP'?'E&P':esc(r)}</h2><button class="secondary" onclick="navigate('Dashboard')">Back to Dashboard</button></div><p class="muted">Tasks assigned to your current role across all projects. Only active, unlocked tasks can be updated by their assigned department.</p><div class="actions" style="align-items:center;margin:14px 0"><label for="myTasksProject" style="margin:0">Project</label><select id="myTasksProject" style="width:min(380px,100%);max-width:100%" onchange="myTasksProject=this.value;render()"><option value="all">All Projects</option>${available.map(p=>`<option value="${esc(p.id)}" ${myTasksProject===p.id?'selected':''}>${esc(p.name)}${p.part?` — ${esc(p.part)}`:''}</option>`).join('')}</select></div><div class="actions"><span class="pill In-Progress">In Process: ${counts.active}</span><span class="pill Completed">Completed: ${counts.completed}</span><span class="pill Upcoming">Upcoming: ${counts.upcoming}</span><span class="pill Delayed">Delayed: ${counts.delayed}</span></div>${items.length?`<div class="tablewrap"><table><tr><th>#</th><th>Project</th><th>Activity</th><th>Planned Start</th><th>Planned Due</th><th>Actual Completion</th><th>Remarks</th><th>Status</th><th>Action</th></tr>${items.map(({p,t,i},idx)=>{const st=activityState(p,i),unlocked=taskStatus(p,i)!=='Locked',canUpdate=approved(p)&&unlocked&&((!done(t)&&['In Progress','Delayed'].includes(st))||done(t)&&['EP','Approver'].includes(r));return `<tr><td>${idx+1}</td><td>${esc(p.name)}</td><td>${esc(t.name)}</td><td>${esc(t.planStart||'—')}</td><td>${esc(t.planEnd||'—')}</td><td>${esc(t.actualEnd||'—')}</td><td>${esc(latestActivityRemark(t))}</td><td><span class="pill ${st.replace(/ /g,'-')}">${st}</span></td><td>${canUpdate?`<button onclick="openDashboardTaskUpdate('${p.id}',${i})">Update</button>`:'—'}</td></tr>`}).join('')}</table></div>`:'<p class="muted">No activities are assigned to this role.</p>'}</div>`;
+}
+function partPicture(p){if(!p.partPicture&&role()==='EP')return `<div class="part-thumb part-placeholder part-clickable" role="button" tabindex="0" title="Click to upload a part picture" onclick="uploadDashboardPicture('${p.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();uploadDashboardPicture('${p.id}')}" ><span>＋ Add</span><span>Picture</span></div>`;return p.partPicture?`<img class="part-thumb part-thumb-image" src="${esc(p.partPicture)}" alt="Part picture for ${esc(p.name)}" title="Click to enlarge picture" role="button" tabindex="0" onclick="showPartPicture('${p.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPartPicture('${p.id}')}">`:`<div class="part-thumb part-placeholder">No picture</div>`}
+function projectTable(arr){arr=arr.filter(p=>p.approval!=='Rejected'&&!p.deleted);return arr.length?`<div class="tablewrap"><table><tr><th>Project / Part</th><th>Status</th><th>Progress</th><th>Current Activity</th><th>Next Activity</th><th>Due</th><th></th></tr>${arr.map(p=>{let i=p.tasks.findIndex(t=>!done(t)),t=i>=0?p.tasks[i]:null,n=i>=0?p.tasks[i+1]:null;return `<tr><td><div class="part-cell">${partPicture(p)}<div><b>${esc(p.name)}</b><div class="muted">${esc(p.part)}</div></div></div></td><td><span class="pill ${status(p)}">${status(p)}</span></td><td>${pct(p)}%<div class="progress"><div style="width:${pct(p)}%"></div></div></td><td>${t?esc(t.name):'Completed'}</td><td>${n?esc(n.name):'—'}</td><td>${t?t.planEnd:'—'}</td><td><div class="actions"><button class="secondary" onclick="selectPortfolioProject('${p.id}')">${portfolioSelection===p.id?'Hide Activities':'View Activities'}</button><button class="secondary" onclick="showProjectGantt('${p.id}')">Gantt Chart</button><button class="secondary" onclick="showProjectFlow('${p.id}')">Process Flow</button><button class="secondary" onclick="showProjectLibrary('${p.id}')">Project Library</button>${['EP','Approver'].includes(role())?`<button class="secondary" onclick="openPortfolioEdit('${p.id}')">Edit Project Details</button>`:''}</div></td></tr>`}).join('')}</table></div>`:'<p class="muted">No projects created. Start by initiating a new project.</p>'}
+function activityRows(items){return items.map((t,i)=>`<tr class="plan-row" data-original="${esc(t.id||'')}" data-name="${esc(t.name)}"><td><span class="plan-drag-handle" draggable="true" title="Drag to reorder activity" aria-label="Drag to reorder activity" tabindex="0">☰</span></td><td><input class="plan-name" aria-label="Activity name" value="${esc(t.name)}" required></td><td><input class="plan-start" type="date" onchange="markPlanDateEdited(this)" value="${esc(t.planStart||'')}" required></td><td><input class="plan-end" type="date" onchange="markPlanDateEdited(this)" value="${esc(t.planEnd||'')}" required></td><td><select class="plan-owner">${allRoles.filter(x=>x!=='Approver').map(r=>`<option value="${r}" ${r===normalizeOwner(t.owner)?'selected':''}>${r==='EP'?'E&P':r}</option>`).join('')}</select></td><td>${(t.subtasks||[]).length?`<button type="button" class="secondary" onclick="openPlanSubtasks('${esc(t.id)}')">Subtasks (${t.subtasks.length})</button> `:''}<button type="button" class="warn" onclick="removeActivityRow(this)">Delete</button></td></tr>`).join('')}
+function appendActivityRow(button){if(!['EP','Approver'].includes(role()))return;let tbody=button.closest('.card').querySelector('.plan-body');let row=document.createElement('tr');row.className='plan-row';row.dataset.original='';row.innerHTML=`<td><span class="plan-drag-handle" draggable="true" title="Drag to reorder activity" aria-label="Drag to reorder activity" tabindex="0">☰</span></td><td><input class="plan-name" placeholder="New activity name" required></td><td><input class="plan-start" type="date" onchange="markPlanDateEdited(this)" required></td><td><input class="plan-end" type="date" onchange="markPlanDateEdited(this)" required></td><td><select class="plan-owner">${allRoles.filter(x=>x!=='Approver').map(r=>`<option value="${r}">${r==='EP'?'E&P':r}</option>`).join('')}</select></td><td><button type="button" class="warn" onclick="removeActivityRow(this)">Delete</button></td>`;tbody.appendChild(row);initializePlanDrag(tbody);row.querySelector('.plan-name').focus()}
+function removeActivityRow(button){if(!['EP','Approver'].includes(role()))return;let tr=button.closest('tr');if(confirm('Remove this activity from this project plan? The change will be recorded when saved.'))tr.remove()}
+function readActivityRows(root){let rows=[...root.querySelectorAll('.plan-body .plan-row')];if(!rows.length)throw Error('A project must contain at least one activity.');return rows.map((row,i)=>{let name=row.querySelector('.plan-name').value.trim(),planStart=row.querySelector('.plan-start').value,planEnd=row.querySelector('.plan-end').value,owner=row.querySelector('.plan-owner').value;if(!name||!planStart||!planEnd||planEnd<planStart)throw Error('Enter a valid activity name and start/finish dates in row '+(i+1));return {original:row.dataset.original,name,planStart,planEnd,owner}})}
+function newProject(){if(!['EP','Approver'].includes(role()))return '<div class="card">Only E&P and Manager can initiate projects.</div>';return `<div class="card"><h2>Project Initiation Request</h2><p class="muted">E&P prepares the request. The project stays locked until Manager approval.</p><form onsubmit="createProject(event)"><div class="grid2">${[['name','Project name'],['part','Part number(s)'],['customer','Customer / OEM'],['supplier','Proposed supplier'],['existing','Existing supplier'],['owner','Project owner']].map(([id,l])=>`<div class="field"><label>${l}</label><input name="${id}" ${['name','part'].includes(id)?'required':''}></div>`).join('')}<div class="field"><label>Category</label><select name="category"><option>Localization</option><option>Resourcing</option><option>New Part Development</option><option>Engineering Change</option><option>Export Development</option></select></div><div class="field"><label>Planned project start</label><input type="date" name="start" value="${today()}" required></div></div><div class="field"><label>Part Picture (optional)</label><input name="partPicture" type="file" accept="image/png,image/jpeg,image/webp" onchange="previewPartPicture(this)"><div id="partPicturePreview"></div></div><div class="field"><label>Scope / justification</label><textarea name="scope"></textarea></div><div class="card"><h3>Controlled SOP Activity Plan — Submitted for Manager Approval</h3><p class="muted">E&P and Manager may add, remove or edit project-specific activities. This does not change the published SOP workflow template.</p><div class="tablewrap"><table><thead><tr><th style="width:42px">Move</th><th>Activity</th><th>Planned Start</th><th>Planned Finish</th><th>Responsible</th><th>Action</th></tr></thead><tbody class="plan-body">${activityRows(db.workflow.map(w=>({...w,planStart:'',planEnd:''})))}</tbody></table></div><div class="actions"><button type="button" class="secondary" onclick="appendActivityRow(this)">+ Add Activity</button><button type="button" class="secondary" onclick="fillInitiationPlan(this.form)">Generate Tentative Dates</button></div></div><button ${role()!=='EP'?'disabled':''}>Submit for Initiation Approval</button></form></div>`}
+function previewPartPicture(input){let f=input.files?.[0],target=$('partPicturePreview');if(!target)return;if(!f){target.innerHTML='';return}if(!['image/png','image/jpeg','image/webp'].includes(f.type)){input.value='';target.textContent='Only JPG, PNG or WebP images are supported.';return}if(f.size>8*1024*1024){input.value='';target.textContent='Image must be smaller than 8 MB.';return}let u=URL.createObjectURL(f);target.innerHTML=`<img class="part-preview" alt="Selected part preview" src="${u}">`;target.querySelector('img').onload=()=>URL.revokeObjectURL(u)}
+function showPartPicture(id){
+ const p=find(id);if(!p?.partPicture)return;
+ closePartPicture();
+ const overlay=document.createElement('div');overlay.className='picture-lightbox';overlay.id='pictureLightbox';overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-label','Part picture');
+ const panel=document.createElement('div');panel.className='picture-lightbox-panel';
+ const close=document.createElement('button');close.type='button';close.className='secondary picture-close';close.textContent='× Close';close.onclick=closePartPicture;
+ const img=document.createElement('img');img.src=p.partPicture;img.alt='Part picture — '+p.name;
+ const caption=document.createElement('div');caption.className='picture-caption';caption.textContent=p.name+(p.part?' — '+p.part:'');
+ panel.append(close,img,caption);overlay.append(panel);overlay.onclick=e=>{if(e.target===overlay)closePartPicture()};document.body.append(overlay);close.focus();
+}
+function closePartPicture(){document.getElementById('pictureLightbox')?.remove()}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('pictureLightbox'))closePartPicture()});
+async function resizePartPicture(file){if(!file)return '';if(!['image/png','image/jpeg','image/webp'].includes(file.type)||file.size>8*1024*1024)throw Error('Use a JPG, PNG or WebP picture under 8 MB.');const url=URL.createObjectURL(file);try{const img=new Image();await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(Error('Could not read image'));img.src=url});let ratio=Math.min(1,640/img.width,640/img.height),canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(img.width*ratio));canvas.height=Math.max(1,Math.round(img.height*ratio));canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);return canvas.toDataURL('image/jpeg',.76)}finally{URL.revokeObjectURL(url)}}
+function normalizeOwner(v){return /^(E&P|EP|E & P)$/i.test(String(v||''))?'EP':String(v||'').trim()}
+function markPlanDateEdited(input){input.dataset.manuallyEdited='true'}
+function fillInitiationPlan(form){
+ let cursor=form.elements.start.value;if(!cursor)return alert('Select a planned project start date first.');
+ const rows=[...form.querySelectorAll('.plan-row')];
+ for(let i=0;i<rows.length;i++){
+  const row=rows[i],startInput=row.querySelector('.plan-start'),endInput=row.querySelector('.plan-end');
+  const workflow=db.workflow.find(w=>String(w.id)===row.dataset.original);
+  const duration=Math.max(1,Number(workflow?.duration)||5);
+  const manualStart=startInput.dataset.manuallyEdited==='true';
+  const manualEnd=endInput.dataset.manuallyEdited==='true';
+  let start=cursor,end;
+  // Explicitly changed dates act as anchors; the next activity follows their finish date.
+  if(manualStart&&startInput.value)start=startInput.value;
+  if(manualEnd&&endInput.value){
+   end=endInput.value;
+   if(!manualStart)start=add(end,-(duration-1));
+  }else end=add(start,duration-1);
+  if(end<start){alert('Planned finish precedes planned start for activity '+(i+1)+'.');return;}
+  startInput.value=start;endInput.value=end;
+  cursor=add(end,1);
+ }
+}
+async function createProject(e){e.preventDefault();if(role()!=='EP')return;let rows;try{rows=readActivityRows(e.target)}catch(err){return alert(err.message)}let f=new FormData(e.target),partPicture='';try{partPicture=await resizePartPicture(f.get('partPicture')?.size?f.get('partPicture'):null)}catch(err){return alert(err.message)}let id='PD-'+String(Date.now()).slice(-9);let tasks=rows.map((r,i)=>{let w=db.workflow.find(w=>String(w.id)===r.original);return {id:i+1,name:r.name,owner:r.owner,evidenceRequired:w?.evidence||'Supporting evidence',planStart:r.planStart,planEnd:r.planEnd,baselineStart:r.planStart,baselineEnd:r.planEnd,actualStart:'',actualEnd:'',status:'Not Started',comments:[],files:[],trials:[],revision:0}});db.projects.push({id,partPicture,name:f.get('name'),part:f.get('part'),customer:f.get('customer'),supplier:f.get('supplier'),existing:f.get('existing'),owner:f.get('owner'),category:f.get('category'),scope:f.get('scope'),start:f.get('start'),approval:'Pending',workflowVersion:db.version,tasks,created:today(),revisions:[]});log('Submitted project for initiation approval with '+tasks.length+' project-specific activities',id);tab='Projects';selected=id;render()}
+function projects(){return selected?projectDetail(find(selected)): `<div class="card"><div class="sectionTitle"><h2>All Projects</h2><button onclick="navigate('New Project')">+ New Project</button></div>${projectTable(visibleProjects())}</div>`}
+function openProject(id){editProject(id)}
+function openPortfolioEdit(id){editProject(id)}
+function projectDetail(p){if(p?.approval==='Rejected'||p?.deleted)p=null;if(!p){selected=null;return projects()}let active=approved(p);return `<div class="card"><div class="sectionTitle"><div style="display:flex;gap:12px;align-items:center">${partPicture(p)}<div><h2>${esc(p.name)} <span class="pill ${status(p)}">${status(p)}</span></h2><p class="muted">${esc(p.part)} · ${esc(p.category)} · Workflow v${p.workflowVersion}</p></div></div><button class="secondary" onclick="backToDashboard()">← Back to Dashboard</button></div><div class="grid3"><p><b>Customer</b><br>${esc(p.customer)}</p><p><b>Supplier</b><br>${esc(p.supplier)}</p><p><b>Progress</b><br>${pct(p)}%<div class="progress"><div style="width:${pct(p)}%"></div></div></p></div><div class="actions"><button class="secondary" onclick="showProjectLibrary('${p.id}')">Project Library</button><button class="secondary" onclick="editProject('${p.id}')" ${role()!=='EP'?'disabled':''}>Edit Project Details</button><button class="secondary" onclick="showProjectGantt('${p.id}')">View Gantt</button>${role()==='Approver'?`<button class="warn" onclick="deleteProject('${p.id}')">Delete Project</button>`:''}</div>${!active?'<div class="note">Awaiting project initiation approval. Task execution is locked.</div>':''}</div><div class="card"><div class="sectionTitle"><h2>Controlled SOP Activities</h2><button class="secondary" onclick="editProjectActivities('${p.id}')" ${!['EP','Approver'].includes(role())?'disabled':''}>Edit Activity Plan (Add / Delete)</button></div><div class="legend"><span class="pill In-Progress">In Process</span><span class="pill Completed">Completed</span><span class="pill Upcoming">Upcoming</span><span class="pill Delayed">Delayed</span></div><p class="note">To save progress or close an activity: expand its row using the arrow beside the activity name. E&P and the assigned responsible department can update unlocked activities after project approval.</p>${active&&p.tasks.length&&taskStatus(p,0)!=='Completed'&&!p.tasks[0].actualStart&&['EP','Approver'].includes(role())?`<div class="note">First activity is scheduled for ${esc(p.tasks[0].planStart)}. <button onclick="initiateFirstActivity('${p.id}')">Initiate First Activity Now</button> E&P / Manager may start it early without changing planned dates.</div>`:''}<p class="muted">Tasks unlock sequentially after documented closure. Closure remarks are mandatory; evidence attachments are optional. Comments and trial history remain in the project record.</p>${p.tasks.map((t,i)=>`<details class="task"><summary>${String(i+1).padStart(2,'0')}. ${esc(t.name)} <span class="pill ${activityState(p,i).replace(/ /g,'-')}">${activityState(p,i)}${taskStatus(p,i)==='Locked'?' · Locked':''}</span> <span class="muted">${esc(normalizeOwner(t.owner)==='EP'?'E&P':t.owner)} · Due ${t.planEnd}</span>${(done(t)?['EP','Approver'].includes(role()):['In Progress','Delayed'].includes(activityState(p,i))&&taskStatus(p,i)!=='Locked'&&(['EP','Approver'].includes(role())||role()===normalizeOwner(t.owner)))?`<button type="button" class="task-update-btn" onclick="event.preventDefault();event.stopPropagation();openTaskUpdate(this,'${p.id}',${i})">Update</button>`:''}<button type="button" class="secondary" style="float:right;margin-right:8px;padding:6px 10px" onclick="event.preventDefault();event.stopPropagation();openSubtaskOnly('${p.id}',${i})">Subtasks</button></summary><p>Required evidence: ${esc(t.evidenceRequired)}</p><div class="field"><label>Responsible department (E&P may revise with audit trail)</label><select id="to${i}" ${role()!=='EP'?'disabled':''}>${['EP','Quality','Production','SCM','PPC'].map(r=>`<option value="${r}" ${normalizeOwner(t.owner)===r?'selected':''}>${r==='EP'?'E&P':r}</option>`).join('')}</select></div><div class="grid2"><div><label>Planned start</label><input type="date" id="ps${i}" value="${t.planStart}" ${role()!=='EP'?'disabled':''}></div><div><label>Planned finish</label><input type="date" id="pe${i}" value="${t.planEnd}" ${role()!=='EP'?'disabled':''}></div></div><div class="grid2"><div><label>Actual start</label><input type="date" id="as${i}" value="${t.actualStart||today()}" ${!active||(!['EP','Approver'].includes(role())&&role()!==normalizeOwner(t.owner))||taskStatus(p,i)==='Locked'||done(t)?'disabled':''}></div><div><label>Actual finish</label><input type="date" id="ae${i}" value="${t.actualEnd||today()}" ${!active||(!['EP','Approver'].includes(role())&&role()!==normalizeOwner(t.owner))||taskStatus(p,i)==='Locked'||done(t)?'disabled':''}></div></div><div class="field"><label>Remarks / trial observations</label><textarea id="comment${i}" placeholder="Record results, changes, issues, corrective actions..."></textarea></div><div class="field"><label>Attach Evidence (up to 10 MB per file; browser storage capacity may be lower)</label><input type="file" id="file${i}" multiple onchange="queueEvidenceFiles('${p.id}',${i},this)" ${!active||(!['EP','Approver'].includes(role())&&role()!==normalizeOwner(t.owner))||taskStatus(p,i)==='Locked'||done(t)?'disabled':''}><div id="evidenceList${i}" class="evidence-preview"><span class="muted">No files selected</span></div></div><div class="actions"><button onclick="updateTask('${p.id}',${i},false)" ${!active||(!['EP','Approver'].includes(role())&&role()!==normalizeOwner(t.owner))||taskStatus(p,i)==='Locked'||done(t)?'disabled':''}>Save Progress / Trial Record</button><button onclick="updateTask('${p.id}',${i},true)" ${!active||(!['EP','Approver'].includes(role())&&role()!==normalizeOwner(t.owner))||taskStatus(p,i)==='Locked'||done(t)?'disabled':''}>Close Activity</button></div><div class="scroll">${t.trials.map((x,j)=>`<div class="audit"><b>Trial / update ${j+1}</b> · ${esc(x.date)} · ${esc(x.who)}<br>${esc(x.note)}</div>`).join('')}${t.files.map(f=>`<div class="audit">📎 <a href="${f.data}" download="${esc(f.name)}">${esc(f.name)}</a></div>`).join('')}</div></details>`).join('')}</div>`}
+function openDashboardTaskUpdate(id,i){
+ const p=find(id);if(!p||!approved(p)||!p.tasks[i]||(done(p.tasks[i])&&!['EP','Approver'].includes(role()))||taskStatus(p,i)==='Locked'||(!['EP','Approver'].includes(role())&&role()!==normalizeOwner(p.tasks[i].owner)))return;
+ document.getElementById('dashboardTaskSource')?.remove();
+ const holder=document.createElement('div');holder.id='dashboardTaskSource';holder.style.display='none';
+ holder.innerHTML=projectDetail(p);document.body.appendChild(holder);
+ const details=holder.querySelectorAll('details.task')[i];
+ if(!details){holder.remove();return;}
+ openTaskUpdate(details.querySelector('.task-update-btn'),id,i);
+}
+let taskModalSource=null;
+function openTaskUpdate(button,id,i){
+ subtaskAttachmentQueue=[];
+ const details=button.closest('details.task');if(!details)return;
+ const old=document.getElementById('taskUpdateOverlay');if(old)closeTaskUpdate();
+ const overlay=document.createElement('div');overlay.id='taskUpdateOverlay';overlay.className='task-overlay';
+ const panel=document.createElement('div');panel.className='task-modal';panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','true');
+ const header=document.createElement('div');header.className='sectionTitle';
+ const heading=document.createElement('h2');heading.textContent='Update Activity — '+(i+1)+'. '+find(id).tasks[i].name;
+ const close=document.createElement('button');close.className='secondary';close.textContent='✕ Close';close.onclick=closeTaskUpdate;
+ header.append(heading,close);panel.append(header);
+ if(done(find(id).tasks[i])&&['EP','Approver'].includes(role())){
+  const t=find(id).tasks[i];
+  const edit=document.createElement('div');edit.className='card completed-activity-card';
+  edit.innerHTML=`<p class="note completed-note">Completed activity: E&P and Manager may revise the actual completion date and add remarks. The activity remains completed.</p><div class="field completed-date"><label>Actual completion date</label><input type="date" id="completedActualEnd" value="${esc(t.actualEnd||today())}"></div><div class="field completed-remarks"><label>Additional remarks / correction reason</label><textarea id="completedRemark" placeholder="Enter update remarks or reason for correction"></textarea></div><div class="field completed-evidence"><label>Attach additional evidence (multiple files, up to 10 MB each)</label><input type="file" multiple onchange="queueEvidenceFiles('${id}',${i},this)"><div id="evidenceList${i}" class="file-preview"><span class="muted">No files selected</span></div></div><button class="completed-save" type="button" onclick="saveCompletedActivityUpdate('${id}',${i})">Save Completed Activity Update & Attachments</button><div class="scroll completed-history">${(t.trials||[]).map(x=>`<div class="audit">${esc(x.date)} · ${esc(x.who)}: ${esc(x.note)}</div>`).join('')}</div>`;
+  panel.append(edit,activityAttachmentEditor(id,i),subtaskEditor(id,i));overlay.append(panel);document.body.append(overlay);overlay.addEventListener('click',e=>{if(e.target===overlay)closeTaskUpdate()});close.focus();return;
+ }
+ const content=document.createElement('div');content.className='task-modal-content';
+ while(details.children.length>1)content.appendChild(details.children[1]);
+ const actions=[...content.querySelectorAll('.actions')].find(el=>el.textContent.includes('Close Activity'));
+ if(actions){actions.before(activityAttachmentEditor(id,i));actions.before(subtaskEditor(id,i));}else content.append(activityAttachmentEditor(id,i),subtaskEditor(id,i));
+ applyCompactActivityLayout(content,i);
+ panel.append(content);overlay.append(panel);document.body.append(overlay);
+ taskModalSource={details,content};overlay.addEventListener('click',e=>{if(e.target===overlay)closeTaskUpdate()});
+ close.focus();
+}
+function applyCompactActivityLayout(content,i){
+ // Reflow the original form controls; preserve their IDs, values, handlers and save behavior.
+ content.classList.add('compact-activity-grid');
+ const children=[...content.children];
+ const mark=(el,cls)=>{if(el)el.classList.add('compact-'+cls)};
+ mark(children.find(el=>el.tagName==='P'&&el.textContent.includes('Required evidence')),'required');
+ mark(children.find(el=>el.querySelector('#to'+i)),'owner');
+ mark(children.find(el=>el.querySelector('#ps'+i)),'planned');
+ mark(children.find(el=>el.querySelector('#as'+i)),'actual');
+ mark(children.find(el=>el.querySelector('#comment'+i)),'remarks');
+ mark(children.find(el=>el.querySelector('#file'+i)),'evidence');
+ mark(children.find(el=>el.classList.contains('actions')&&el.textContent.includes('Close Activity')),'task-save');
+ mark(children.find(el=>el.classList.contains('scroll')),'history');
+ mark(children.find(el=>el.classList.contains('card')&&el.textContent.includes('Existing Activity Attachments')),'existing');
+ mark(children.find(el=>el.classList.contains('card')&&el.textContent.includes('Subtasks')),'subtasks');
+}
+function openSubtaskOnly(id,i){
+ subtaskAttachmentQueue=[];
+ const p=find(id),t=p?.tasks[i];if(!t)return;
+ if(document.getElementById('taskUpdateOverlay'))closeTaskUpdate();
+ const overlay=document.createElement('div');overlay.id='taskUpdateOverlay';overlay.className='task-overlay';
+ const panel=document.createElement('div');panel.className='task-modal';panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','true');
+ const header=document.createElement('div');header.className='sectionTitle';
+ const heading=document.createElement('h2');heading.textContent='Subtasks — '+(i+1)+'. '+t.name;
+ const close=document.createElement('button');close.className='secondary';close.textContent='✕ Close';close.onclick=closeTaskUpdate;
+ header.append(heading,close);panel.append(header,subtaskEditor(id,i));overlay.append(panel);document.body.append(overlay);
+ overlay.addEventListener('click',e=>{if(e.target===overlay)closeTaskUpdate()});close.focus();
+}
+function subtaskEditor(id,i){
+ const t=find(id)?.tasks[i],wrap=document.createElement('section');wrap.className='card';
+ wrap.innerHTML=`<div class="sectionTitle"><h3>Subtasks — ${esc(t?.name||'')}</h3><button type="button" class="secondary" id="editExistingSubtasksButton" onclick="toggleExistingSubtaskEdit('${id}',${i},true)">Edit</button></div><div id="subtaskList">${subtaskRows(t,i,id,false)}</div><div id="existingSubtaskEditPanel" hidden></div><button type="button" id="showSubtaskForm" onclick="toggleSubtaskForm(true)">+ Add Subtask</button><div id="subtaskForm" hidden class="compact-subtask-form"><p class="muted subtask-instructions">Enter subtask details, then press Save Subtask.</p><div class="grid2 subtask-fields"><div class="field subtask-name-field"><label>New subtask</label><input id="newSubtaskName" maxlength="200" placeholder="Describe the subtask"></div><div class="field subtask-remarks-field"><label>Remarks (optional)</label><textarea id="newSubtaskNote" maxlength="500" rows="3" placeholder="Instructions or details"></textarea></div><div class="field subtask-start-field"><label>Start date</label><input type="date" id="newSubtaskStart" value="${today()}"></div><div class="field subtask-end-field"><label>End date</label><input type="date" id="newSubtaskEnd" value="${today()}"></div></div><div class="field subtask-files-field"><label>Subtask attachments (optional, max 10 MB each)</label><input type="file" id="newSubtaskFiles" multiple onchange="queueSubtaskFiles(this)"><div id="subtaskFilePreview" class="evidence-preview"><span class="muted">No files selected</span></div></div><div class="actions subtask-save-actions"><button type="button" onclick="addActivitySubtask('${id}',${i})">Save Subtask</button><button type="button" class="secondary" onclick="toggleSubtaskForm(false)">Cancel</button></div></div>`;
+ return wrap;
+}
+function toggleSubtaskForm(show){
+ const form=$('subtaskForm'),button=$('showSubtaskForm');if(!form||!button)return;
+ form.hidden=!show;form.style.display=show?'block':'none';button.hidden=show;button.style.display=show?'none':'';
+ if(!show){subtaskAttachmentQueue=[];const preview=$('subtaskFilePreview');if(preview)preview.innerHTML='<span class="muted">No files selected</span>';}if(show)$('newSubtaskName')?.focus();
+}
+function queueSubtaskFiles(input){
+ const added=Array.from(input.files||[]);
+ if(added.some(f=>f.size>MAX_ATTACHMENT_BYTES)){alert('Each attachment must be 10 MB or less.');input.value='';return;}
+ subtaskAttachmentQueue.push(...added);input.value='';renderSubtaskFilePreview();
+}
+function removeSubtaskQueuedFile(index){subtaskAttachmentQueue.splice(index,1);renderSubtaskFilePreview();}
+function renderSubtaskFilePreview(){
+ const el=$('subtaskFilePreview');if(!el)return;
+ el.innerHTML=subtaskAttachmentQueue.length?'<p class="muted">Selected files ('+subtaskAttachmentQueue.length+') — not uploaded until Save Subtask:</p>'+subtaskAttachmentQueue.map((f,j)=>'<div class="queued-file"><span>'+esc(f.name)+' <small class="muted">('+formatFileSize(f.size)+')</small></span><button type="button" class="warn" onclick="removeSubtaskQueuedFile('+j+')" aria-label="Remove selected file">✕</button></div>').join(''):'<span class="muted">No files selected</span>';
+}
+function formatFileSize(n){return n>=1048576?(n/1048576).toFixed(2)+' MB':Math.ceil(n/1024)+' KB';}
+function subtaskRows(t,taskIndex,projectId,editMode=false){
+ return (t?.subtasks||[]).length?`<div class="tablewrap"><table><thead><tr><th>#</th><th>Subtask</th><th>Start</th><th>End</th><th>Remarks</th><th>Attachments</th><th>Added by / time</th></tr></thead><tbody>${t.subtasks.map((x,j)=>`<tr><td>${j+1}</td><td>${editMode?`<input class="existing-st-name" value="${esc(x.name)}" required>`:esc(x.name)}</td><td>${editMode?`<input type="date" class="existing-st-start" value="${esc(x.planStart||'')}" required>`:esc(x.planStart||'—')}</td><td>${editMode?`<input type="date" class="existing-st-end" value="${esc(x.planEnd||'')}" required>`:esc(x.planEnd||'—')}</td><td>${editMode?`<input class="existing-st-note" value="${esc(x.note||'')}">`:esc(x.note||'—')}</td><td>${(x.files||[]).map((f,k)=>`<div class="attachment-manage-row"><a href="${esc(f.data)}" download="${esc(f.name)}">${esc(f.name)}</a>${editMode&&role()==='EP'?`<button type="button" class="secondary" onclick="replaceExistingAttachment('${projectId}',${taskIndex},${j},${k})">Update</button><button type="button" class="warn" onclick="deleteExistingAttachment('${projectId}',${taskIndex},${j},${k})">Delete</button>`:''}</div>`).join('')||'—'}</td><td>${esc(x.by)}<br>${esc(x.at)}</td></tr>`).join('')}</tbody></table></div>`:'<p class="muted">No subtasks added yet.</p>';
+}
+function toggleExistingSubtaskEdit(id,i,enabled){
+ const p=find(id),t=p?.tasks[i],panel=$('existingSubtaskEditPanel'),button=$('editExistingSubtasksButton'),list=$('subtaskList');
+ if(!t||!panel||!button||!list)return;
+ const allowed=['EP','Approver'].includes(role())||t.owner===role();
+ if(enabled&&!allowed)return alert('Only E&P, Manager or the responsible department can edit subtask details.');
+ panel.hidden=!enabled;panel.style.display=enabled?'block':'none';
+ button.textContent=enabled?'Editing…':'Edit';button.disabled=enabled;
+ list.innerHTML=subtaskRows(t,i,id,enabled);
+ if(!enabled){panel.innerHTML='';return;}
+ panel.innerHTML=`<div class="field"><label>Reason for changes</label><textarea id="existingSubtaskEditReason" placeholder="Reason for revising subtasks"></textarea></div><div class="actions"><button type="button" onclick="saveExistingSubtasks(null,'${id}',${i})">Save Changes</button><button type="button" class="secondary" onclick="toggleExistingSubtaskEdit('${id}',${i},false)">Cancel</button></div>`;
+}
+function saveExistingSubtasks(e,id,i){
+ if(e)e.preventDefault();const p=find(id),t=p?.tasks[i];if(!t)return;
+ if(!(['EP','Approver'].includes(role())||t.owner===role()))return;
+ const rows=[...($('subtaskList')?.querySelectorAll('tbody tr')||[])],edits=[],changes=[];
+ for(let j=0;j<rows.length;j++){
+  const r=rows[j],st=t.subtasks[j];if(!st)continue;
+  const v={name:r.querySelector('.existing-st-name').value.trim(),planStart:r.querySelector('.existing-st-start').value,planEnd:r.querySelector('.existing-st-end').value,note:r.querySelector('.existing-st-note').value.trim()};
+  if(!v.name||!v.planStart||!v.planEnd)return alert('Name, start and end dates are required.');
+  if(v.planEnd<v.planStart)return alert('End date cannot precede start date.');
+  for(const [key,value] of Object.entries(v))if((st[key]||'')!==value)changes.push(st.name+': '+key+' '+(st[key]||'')+' → '+value);
+  edits.push({st,v});
+ }
+ if(changes.length){const reason=$('existingSubtaskEditReason').value.trim();if(!reason)return alert('Enter a reason for changes.');
+  for(const {st,v} of edits)Object.assign(st,v);
+  log('Edited subtasks in '+t.name+': '+changes.join('; ')+' | Reason: '+reason,id);
+ }
+ toggleExistingSubtaskEdit(id,i,false);
+}
+async function addActivitySubtask(id,i){
+ const p=find(id),t=p?.tasks[i];if(!t)return;
+ const name=$('newSubtaskName')?.value.trim(),note=$('newSubtaskNote')?.value.trim()||'';
+ const planStart=$('newSubtaskStart')?.value,planEnd=$('newSubtaskEnd')?.value;
+ if(!name)return alert('Enter a subtask name.');
+ if(!planStart||!planEnd)return alert('Enter both subtask start and end dates.');
+ if(planEnd<planStart)return alert('Subtask end date cannot precede its start date.');
+ const files=[];
+ for(const file of subtaskAttachmentQueue){
+  if(file.size>MAX_ATTACHMENT_BYTES)return alert('Each attachment must be 10 MB or less.');
+  const data=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(file)});
+  files.push({name:file.name,data,uploadedAt:new Date().toLocaleString(),uploadedBy:role()});
+ }
+ // Ask whether the new subtask should move subsequent activities, using its
+ // planned finish compared with the parent activity planned finish.
+ const previousFinish=t.planEnd;
+ const extensionDays=previousFinish&&planEnd>previousFinish?diff(previousFinish,planEnd):0;
+ const reviseFuture=confirm('Subtask saved dates: '+planStart+' to '+planEnd+'.\n\nDo you want to revise the planned dates of all following activities according to this subtask?\n\nYes (OK): adjust subsequent activity dates.\nNo (Cancel): add the subtask without changing other dates.');
+ t.subtasks??=[];
+ t.subtasks.push({name,note,planStart,planEnd,files,by:role(),at:new Date().toLocaleString()});
+ let shifted=0;
+ if(reviseFuture&&extensionDays>0){
+  // Extend the parent finish and move every subsequent activity by the same
+  // calendar-day offset. Keep actual dates and completed work untouched.
+  t.planEnd=planEnd;
+  for(const future of p.tasks.slice(i+1)){
+   if(future.planStart)future.planStart=add(future.planStart,extensionDays);
+   if(future.planEnd)future.planEnd=add(future.planEnd,extensionDays);
+   shifted++;
+  }
+ }
+ log('Added subtask "'+name+'" to activity '+t.name+(reviseFuture?(extensionDays>0?'; extended parent and shifted '+shifted+' future activities by '+extensionDays+' day(s)':' ; reviewed dates — no extension needed'):'; future dates unchanged'),id);
+ $('subtaskList').innerHTML=subtaskRows(t,i,id);
+ $('newSubtaskName').value='';$('newSubtaskNote').value='';
+ $('newSubtaskFiles').value='';
+ subtaskAttachmentQueue=[];renderSubtaskFilePreview();
+ toggleSubtaskForm(false);
+}
+function activityAttachmentEditor(id,i){
+ const section=document.createElement('section');section.className='card';section.innerHTML=`<h3>Existing Activity Attachments</h3><p class="muted">Download, replace or delete an already saved attachment. E&P Custodian authorization is required for changes.</p><div id="existingActivityFiles">${activityAttachmentRows(id,i)}</div>`;return section;
+}
+function activityAttachmentRows(id,i){
+ const t=find(id)?.tasks[i];return t?.files?.length?t.files.map((f,k)=>`<div class="attachment-manage-row"><a href="${esc(f.data)}" download="${esc(f.name)}">${esc(f.name)}</a><span class="muted">${esc(f.uploadedAt||'')}</span>${role()==='EP'?`<button type="button" class="secondary" onclick="replaceExistingAttachment('${id}',${i},null,${k})">Update</button><button type="button" class="warn" onclick="deleteExistingAttachment('${id}',${i},null,${k})">Delete</button>`:''}</div>`).join(''):'<p class="muted">No saved activity attachments.</p>';
+}
+function refreshSavedAttachments(id,i){
+ const main=$('existingActivityFiles');if(main)main.innerHTML=activityAttachmentRows(id,i);
+ const subtasks=$('subtaskList');if(subtasks)subtasks.innerHTML=subtaskRows(find(id).tasks[i],i,id,!$('existingSubtaskEditPanel')?.hidden);
+}
+async function authorizeAttachmentChange(){
+ if(role()!=='EP'){alert('Only E&P Custodian can replace or delete saved attachments.');return false;}
+ const pin=db.directory?.EP?.passcode;if(!pin){alert('Set an E&P passcode in Role Settings first.');return false;}
+ const entered=await passwordPrompt('Enter E&P Custodian passcode to modify this attachment:');
+ if(entered===null)return false;
+ if(await digest(entered)!==pin){alert('Incorrect E&P passcode.');return false;}
+ return true;
+}
+async function deleteExistingAttachment(id,i,subIndex,fileIndex){
+ const t=find(id)?.tasks[i],list=subIndex===null?t?.files:t?.subtasks?.[subIndex]?.files;
+ const file=list?.[fileIndex];if(!file)return alert('Attachment not found.');
+ if(!await authorizeAttachmentChange())return;
+ if(!confirm('Delete saved attachment "'+file.name+'"? This cannot be undone.'))return;
+ const reason=prompt('Reason for deletion (mandatory):');if(!reason?.trim())return;
+ list.splice(fileIndex,1);
+ if(subIndex===null)(t.trials||[]).forEach(tr=>{if(Array.isArray(tr.files))tr.files=tr.files.filter(n=>n!==file.name)});
+ log('Deleted '+(subIndex===null?'activity':'subtask')+' attachment '+file.name+' from '+t.name+'; reason: '+reason,id);
+ refreshSavedAttachments(id,i);
+}
+async function replaceExistingAttachment(id,i,subIndex,fileIndex){
+ const t=find(id)?.tasks[i],list=subIndex===null?t?.files:t?.subtasks?.[subIndex]?.files;
+ const old=list?.[fileIndex];if(!old)return alert('Attachment not found.');
+ if(!await authorizeAttachmentChange())return;
+ const input=document.createElement('input');input.type='file';input.style.display='none';document.body.append(input);
+ input.onchange=async()=>{
+  try{
+   const file=input.files?.[0];if(!file)return;
+   if(file.size>MAX_ATTACHMENT_BYTES)return alert('Maximum file size is 10 MB.');
+   const reason=prompt('Reason for replacing "'+old.name+'" (mandatory):');if(!reason?.trim())return;
+   if(!confirm('Replace "'+old.name+'" with "'+file.name+'"?'))return;
+   const data=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(file)});
+   list[fileIndex]={name:file.name,data,uploadedAt:new Date().toLocaleString(),uploadedBy:role()};
+   if(subIndex===null)(t.trials||[]).forEach(tr=>{if(Array.isArray(tr.files))tr.files=tr.files.map(n=>n===old.name?file.name:n)});
+   log('Replaced '+(subIndex===null?'activity':'subtask')+' attachment '+old.name+' with '+file.name+' in '+t.name+'; reason: '+reason,id);
+   refreshSavedAttachments(id,i);
+   if(subIndex!==null)refreshLibrarySubtasksIfOpen(id,i);
+  }catch(e){alert('Unable to replace attachment: '+e.message)}finally{input.remove()}
+ };
+ input.click();
+}
+async function saveCompletedActivityUpdate(id,i){
+ if(!['EP','Approver'].includes(role()))return;
+ const p=find(id),t=p?.tasks[i];if(!t||!done(t))return;
+ const date=$('completedActualEnd').value,note=$('completedRemark').value.trim();
+ const queued=[...(evidenceQueue.get(evidenceKey(id,i))||[])];
+ if(!date)return alert('Enter an actual completion date.');
+ if(!note&&date===t.actualEnd&&!queued.length)return alert('Enter remarks, revise the completion date, or select attachments.');
+ if(date!==t.actualEnd&&!note)return alert('Enter a reason for revising the completion date.');
+ const newFiles=[];
+ try{
+  for(const file of queued){
+   if(file.size>MAX_ATTACHMENT_BYTES)return alert('Each attachment must be 10 MB or less.');
+   const data=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(file)});
+   newFiles.push({name:file.name,data,uploadedAt:new Date().toLocaleString(),uploadedBy:role()});
+  }
+ }catch(err){return alert('Unable to read attachment: '+err.message)}
+ const prior=t.actualEnd;
+ t.files??=[];t.files.push(...newFiles);
+ t.actualEnd=date;t.trials??=[];
+ t.trials.push({date:new Date().toLocaleString(),who:role(),note:note||'Additional evidence uploaded',files:newFiles.map(f=>f.name)});
+ evidenceQueue.delete(evidenceKey(id,i));
+ log('Updated completed activity '+t.name+'; actual completion: '+prior+' → '+date+'; added '+newFiles.length+' attachment(s); remarks: '+(note||'Additional evidence uploaded'),id);
+ closeTaskUpdate();render();
+}
+function closeTaskUpdate(){if(!taskModalSource){const current=document.getElementById('taskUpdateOverlay');if(current){const fileList=current.querySelector('[id^=evidenceList]');if(fileList){const ix=Number(fileList.id.slice('evidenceList'.length));if(selected)evidenceQueue.delete(evidenceKey(selected,ix));}}}if(taskModalSource){const activeInput=taskModalSource.content.querySelector('input[id^=file]');if(activeInput){const ix=Number(activeInput.id.slice(4));const projectId=selected;evidenceQueue.delete(evidenceKey(projectId,ix));}}subtaskAttachmentQueue=[];const overlay=document.getElementById('taskUpdateOverlay');if(taskModalSource){while(taskModalSource.content.firstChild)taskModalSource.details.appendChild(taskModalSource.content.firstChild);taskModalSource=null}overlay?.remove();document.getElementById('dashboardTaskSource')?.remove()}
+function editProjectActivities(id){if(!['EP','Approver'].includes(role()))return alert('Only E&P or Manager can edit project activities.');let p=find(id);if(!p)return;selected=id;tab='Projects';$('content').innerHTML=`<div class="card"><div class="sectionTitle"><h2>Edit Project Activity Plan — ${esc(p.name)}</h2><button class="secondary" onclick="backToDashboard()">Cancel</button></div><p class="note">Add, remove, rename, reschedule or reassign project-specific activities. Changes are logged with reason and previous values. Removing an activity with progress/evidence requires additional confirmation and its history is retained in the audit record. Drag activities using the handle on the left to change their order. You will be asked whether to recalculate following planned dates. The published SOP template is unaffected.</p><form onsubmit="saveProjectActivities(event,'${p.id}')"><div class="tablewrap"><table><thead><tr><th>Activity</th><th>Planned Start</th><th>Planned Finish</th><th>Responsible</th><th>Action</th></tr></thead><tbody class="plan-body">${activityRows(p.tasks)}</tbody></table></div><div class="actions" style="margin:12px 0"><button type="button" class="secondary" onclick="appendActivityRow(this)">+ Add Activity</button></div><div class="field"><label>Reason for changes (mandatory)</label><textarea name="reason" required placeholder="Explain the changes to this project activity plan"></textarea></div><div class="actions"><button type="submit">Save Activity Plan</button><button type="button" class="secondary" onclick="backToDashboard()">Cancel</button></div></form></div>`;initializePlanDrag($('content').querySelector('.plan-body'))}
+// Dragging is restricted to the handle so inputs and selects remain usable.
+function initializePlanDrag(tbody){
+ if(!tbody||tbody.dataset.dragReady)return;
+ tbody.dataset.dragReady='1';
+ let moving=null,marker=null,initialOrder='',dropAccepted=false;
+ const order=()=>[...tbody.querySelectorAll('tr.plan-row')].map(r=>r.dataset.original+'|'+r.dataset.name).join('~~');
+ const cleanup=()=>{
+  marker?.remove();marker=null;
+  moving?.classList.remove('plan-dragging');
+  tbody.querySelectorAll('.plan-drop-before,.plan-drop-after').forEach(r=>r.classList.remove('plan-drop-before','plan-drop-after'));
+  moving=null;initialOrder='';dropAccepted=false;
+ };
+ tbody.addEventListener('dragstart',e=>{
+  const handle=e.target.closest('.plan-drag-handle');
+  if(!handle){e.preventDefault();return}
+  moving=handle.closest('tr.plan-row');initialOrder=order();dropAccepted=false;
+  e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain','ahtl-activity-reorder');
+  // Keep the original row in place while dragging; only a visual insertion indicator moves.
+  moving.classList.add('plan-dragging');
+ });
+ tbody.addEventListener('dragover',e=>{
+  if(!moving)return;
+  e.preventDefault();e.dataTransfer.dropEffect='move';
+  const target=e.target.closest('tr.plan-row');
+  tbody.querySelectorAll('.plan-drop-before,.plan-drop-after').forEach(r=>r.classList.remove('plan-drop-before','plan-drop-after'));
+  if(!target||target===moving)return;
+  const rect=target.getBoundingClientRect();
+  target.classList.add(e.clientY<rect.top+rect.height/2?'plan-drop-before':'plan-drop-after');
+ });
+ tbody.addEventListener('dragleave',e=>{
+  if(!tbody.contains(e.relatedTarget))tbody.querySelectorAll('.plan-drop-before,.plan-drop-after').forEach(r=>r.classList.remove('plan-drop-before','plan-drop-after'));
+ });
+ tbody.addEventListener('drop',e=>{
+  if(!moving)return;
+  e.preventDefault();dropAccepted=true;
+  const target=e.target.closest('tr.plan-row');
+  if(target&&target!==moving){
+   const rect=target.getBoundingClientRect();
+   tbody.insertBefore(moving,e.clientY<rect.top+rect.height/2?target:target.nextSibling);
+  }
+  const changed=order()!==initialOrder;
+  cleanup();
+  if(!changed)return;
+  // Explicit Yes/No decision after the mouse is released.
+  const revise=confirm('Activity order changed. Do you want to align the planned dates of all following activities with the new sequence?\n\nOK (Yes): Recalculate dates sequentially using each activity’s existing duration.\nCancel (No): Keep the existing planned dates.\n\nThe new order will be saved when you click Save Activity Plan.');
+  if(revise)recalculateReorderedPlan(tbody);
+ });
+ tbody.addEventListener('dragend',()=>{if(!dropAccepted)cleanup()});
+}
+function recalculateReorderedPlan(tbody){
+ const rows=[...tbody.querySelectorAll('tr.plan-row')];
+ // Keep the first activity dates as the scheduling anchor; retain each activity duration.
+ for(let i=1;i<rows.length;i++){
+  const prev=rows[i-1],current=rows[i];
+  const previousEnd=prev.querySelector('.plan-end')?.value;
+  const start=current.querySelector('.plan-start'),end=current.querySelector('.plan-end');
+  if(!previousEnd||!start||!end||!start.value||!end.value)continue;
+  const duration=Math.max(0,diff(start.value,end.value));
+  start.value=add(previousEnd,1);end.value=add(start.value,duration);
+  start.dataset.manual='true';end.dataset.manual='true';
+ }
+}
+function openPlanSubtasks(taskId){
+ if(!['EP','Approver'].includes(role()))return;
+ const p=find(selected),t=p?.tasks.find(x=>String(x.id)===String(taskId));if(!t||!(t.subtasks||[]).length)return;
+ document.getElementById('planSubtaskOverlay')?.remove();
+ const overlay=document.createElement('div');overlay.id='planSubtaskOverlay';overlay.className='task-overlay';
+ const modal=document.createElement('div');modal.className='task-modal';modal.setAttribute('role','dialog');modal.setAttribute('aria-modal','true');
+ modal.innerHTML=`<div class="sectionTitle"><h2>Subtasks — ${esc(t.name)}</h2><button type="button" class="secondary" onclick="closePlanSubtasks()">✕ Close</button></div><p class="muted">Edit subtask details below. Saved attachments are retained.</p><form id="planSubtaskForm" onsubmit="savePlanSubtasks(event,'${esc(taskId)}')"><div class="tablewrap"><table><thead><tr><th>#</th><th>Subtask</th><th>Planned Start</th><th>Planned End</th><th>Remarks</th></tr></thead><tbody id="planSubtaskRows">${t.subtasks.map((st,i)=>`<tr data-index="${i}"><td>${i+1}</td><td><input class="subtask-name" value="${esc(st.name)}" required></td><td><input class="subtask-start" type="date" value="${esc(st.planStart||'')}" required></td><td><input class="subtask-end" type="date" value="${esc(st.planEnd||'')}" required></td><td><input class="subtask-note" value="${esc(st.note||'')}"></td></tr>`).join('')}</tbody></table></div><div class="actions" style="margin:12px 0"><button type="button" class="secondary" onclick="addPlanSubtaskRow()">+ Add Subtask</button></div><div class="field"><label>Reason for subtask changes (required if modified)</label><textarea name="reason" placeholder="Explain the changes"></textarea></div><div class="actions"><button type="submit">Save Subtasks</button><button type="button" class="secondary" onclick="closePlanSubtasks()">Cancel</button></div></form>`;
+ overlay.append(modal);document.body.append(overlay);overlay.addEventListener('click',e=>{if(e.target===overlay)closePlanSubtasks()});
+}
+function addPlanSubtaskRow(){
+ const tbody=document.getElementById('planSubtaskRows');if(!tbody)return;
+ const row=document.createElement('tr');row.dataset.new='true';
+ const index=tbody.rows.length+1;
+ row.innerHTML=`<td>${index}</td><td><input class="subtask-name" placeholder="Subtask name" required></td><td><input class="subtask-start" type="date" value="${today()}" required></td><td><input class="subtask-end" type="date" value="${today()}" required></td><td><input class="subtask-note" placeholder="Remarks"></td>`;
+ tbody.appendChild(row);row.querySelector('.subtask-name').focus();
+}
+function closePlanSubtasks(){document.getElementById('planSubtaskOverlay')?.remove()}
+function savePlanSubtasks(e,taskId){
+ e.preventDefault();if(!['EP','Approver'].includes(role()))return;
+ const p=find(selected),t=p?.tasks.find(x=>String(x.id)===String(taskId));if(!t)return;
+ const edits=[],additions=[],changes=[];
+ for(const row of e.target.querySelectorAll('#planSubtaskRows tr')){
+  const values={name:row.querySelector('.subtask-name').value.trim(),planStart:row.querySelector('.subtask-start').value,planEnd:row.querySelector('.subtask-end').value,note:row.querySelector('.subtask-note').value.trim()};
+  if(!values.name||!values.planStart||!values.planEnd)return alert('Name, start date and end date are required for every subtask.');
+  if(values.planEnd<values.planStart)return alert('Subtask end date cannot be before its start date.');
+  if(row.dataset.new==='true'){
+   additions.push(values);changes.push('Added subtask: '+values.name+' ('+values.planStart+' to '+values.planEnd+')');continue;
+  }
+  const i=Number(row.dataset.index),st=t.subtasks[i];if(!st)continue;
+  for(const [key,value] of Object.entries(values))if((st[key]||'')!==value)changes.push(st.name+': '+key+' '+(st[key]||'')+' → '+value);
+  edits.push({st,values});
+ }
+ if(!changes.length){closePlanSubtasks();return}
+ const reason=e.target.elements.reason.value.trim();if(!reason)return alert('Enter a reason for the subtask changes.');
+ const previousFinish=t.planEnd;
+ const proposedEnds=[...edits.map(x=>x.values.planEnd),...additions.map(x=>x.planEnd)];
+ const latestEnd=proposedEnds.reduce((max,d)=>d>max?d:max,previousFinish||'');
+ const extensionDays=previousFinish&&latestEnd>previousFinish?diff(previousFinish,latestEnd):0;
+ const reviseFuture=confirm('Are the following activities linked to this activity?\n\nYes (OK): adjust the planned dates of subsequent activities if the subtasks extend the current activity.\nNo (Cancel): save the subtasks without changing subsequent activity dates.');
+ // The choice above is not a cancellation of saving: either option saves the subtasks.
+ for(const {st,values} of edits)Object.assign(st,values);
+ t.subtasks??=[];
+ for(const values of additions)t.subtasks.push({...values,files:[],by:role(),at:new Date().toLocaleString()});
+ let shifted=0;
+ if(reviseFuture&&extensionDays>0){
+  t.planEnd=latestEnd;
+  const taskIndex=p.tasks.indexOf(t);
+  for(const future of p.tasks.slice(taskIndex+1)){
+   if(future.planStart)future.planStart=add(future.planStart,extensionDays);
+   if(future.planEnd)future.planEnd=add(future.planEnd,extensionDays);
+   shifted++;
+  }
+ }
+ const scheduleNote=reviseFuture?(extensionDays>0?'Linked: extended parent and shifted '+shifted+' subsequent activities by '+extensionDays+' calendar day(s)':'Linked: no date extension needed'):'Not linked: following activity dates unchanged';
+ p.revisions??=[];p.revisions.push({date:new Date().toLocaleString(),who:role(),field:'Subtasks — '+t.name,old:'See audit history',new:changes.join('; ')+'; '+scheduleNote,reason});
+ log('Updated subtasks in '+t.name+': '+changes.join('; ')+' | '+scheduleNote+' | Reason: '+reason,p.id);
+ closePlanSubtasks();
+ // Refresh activity plan dates so the revised schedule is visible immediately.
+ editProjectActivities(p.id);
+}
+
+function saveProjectActivities(e,id){e.preventDefault();if(!['EP','Approver'].includes(role()))return;let p=find(id),rows;try{rows=readActivityRows(e.target)}catch(err){return alert(err.message)}let reason=e.target.elements.reason.value.trim();if(!reason)return alert('Reason for change is mandatory.');let old=p.tasks,used=new Set(),changes=[];const originalOrder=old.map(t=>String(t.id)).join('|');const revisedOrder=rows.map(r=>String(r.original||'NEW')).join('|');if(originalOrder!==revisedOrder)changes.push('Reordered activity sequence: '+rows.map(r=>r.name).join(' → '));let next=rows.map((r,i)=>{let match=old.find(t=>String(t.id)===r.original&&!used.has(t.id));if(match){used.add(match.id);let revised={...match,subtasks:(match.subtasks||[]).map(st=>({...st,files:[...(st.files||[])]}))};for(let field of ['name','owner','planStart','planEnd'])if(revised[field]!==r[field]){changes.push(`${match.name}: ${field} ${revised[field]} → ${r[field]}`);revised[field]=r[field]}return revised}changes.push('Added activity: '+r.name);return {id:Math.max(0,...old.map(t=>+t.id||0))+i+1,name:r.name,owner:r.owner,evidenceRequired:'Supporting evidence',planStart:r.planStart,planEnd:r.planEnd,baselineStart:r.planStart,baselineEnd:r.planEnd,actualStart:'',actualEnd:'',status:'Not Started',comments:[],files:[],trials:[],revision:0}});
+ let removed=old.filter(t=>!used.has(t.id));if(removed.length){let protectedItems=removed.filter(t=>t.status!=='Not Started'||t.files?.length||t.trials?.length);if(protectedItems.length&&!confirm('You are removing activities with progress, evidence or trial records: '+protectedItems.map(t=>t.name).join(', ')+'. Their records will be retained in the audit revision snapshot. Continue?'))return;changes.push(...removed.map(t=>'Removed activity: '+t.name))}if(!changes.length){backToDashboard();return;}if(!confirm('Save '+changes.length+' changes to this project activity plan?'))return;p.revisions??=[];p.revisions.push({date:new Date().toLocaleString(),who:role(),field:'Project activity plan',old:JSON.stringify(old),new:JSON.stringify(next.map(t=>({id:t.id,name:t.name,owner:t.owner,planStart:t.planStart,planEnd:t.planEnd}))),reason});p.tasks=next;log('Updated project activity plan: '+changes.join('; ')+' | Reason: '+reason,id);backToDashboard()}
+function uploadDashboardPicture(id){if(role()!=='EP')return alert('Only E&P can update project pictures.');let input=document.createElement('input');input.type='file';input.accept='image/png,image/jpeg,image/webp';input.onchange=async()=>{if(!input.files?.length)return;try{let picture=await resizePartPicture(input.files[0]),p=find(id);if(!p)return;let previous=p.partPicture?'Existing image':'No image';p.partPicture=picture;p.revisions??=[];p.revisions.push({date:new Date().toLocaleString(),who:role(),field:'partPicture',old:previous,new:'Image uploaded'});log('Updated part picture from dashboard ('+previous+')',id);render()}catch(e){alert(e.message)}};input.click()}
+function editProject(id){let p=find(id);if(!p)return;selected=id;tab='Projects';projectEditView=true;$('pageTitle').textContent='Projects';$('content').innerHTML=`<div class="card"><div class="sectionTitle"><h2>Edit Project Details — ${esc(p.name)}</h2><button class="secondary" onclick="backToDashboard()">Cancel</button></div><div class="note">${['EP','Approver'].includes(role())?'E&P and Manager may update project details. Changes are audited.':'Read-only project details. Only E&P Custodian and Manager / Approver are authorized to make changes.'} Initiation approval and quality-gate approvals cannot be bypassed.</div><form onsubmit="saveProjectDetails(event,'${p.id}')"><fieldset ${['EP','Approver'].includes(role())?'':'disabled'} style="border:0;padding:0;margin:0;min-width:0"><div class="grid2">${[['name','Project name'],['part','Part number(s)'],['customer','Customer / OEM'],['supplier','Proposed supplier'],['existing','Existing supplier'],['owner','Project owner'],['start','Planned project start']].map(([key,label])=>`<div class="field"><label>${label}</label><input name="${key}" type="${key==='start'?'date':'text'}" value="${esc(p[key])}" ${['name','part','start'].includes(key)?'required':''}></div>`).join('')}<div class="field"><label>Category</label><select name="category">${['Localization','Resourcing','New Part Development','Engineering Change','Export Development'].map(v=>`<option ${p.category===v?'selected':''}>${v}</option>`).join('')}</select></div></div><div class="field"><label>Scope / justification</label><textarea name="scope">${esc(p.scope)}</textarea></div><div class="field"><label>Part picture</label><div class="part-cell">${p.partPicture?`<img class="part-preview" src="${esc(p.partPicture)}" alt="Part picture">`:'<span class="muted">No picture uploaded</span>'}</div><input type="file" name="partPicture" accept="image/png,image/jpeg,image/webp" onchange="previewPartPicture(this)"><div id="partPicturePreview"></div><label style="margin-top:8px"><input type="checkbox" name="removePicture" style="width:auto"> Remove existing picture</label></div></fieldset><div class="actions">${['EP','Approver'].includes(role())?'<button type="submit">Save All Changes (Audited)</button>':''}<button type="button" class="secondary" onclick="backToDashboard()">Back to Dashboard</button>${role()==='Approver'?`<button type="button" class="warn" style="margin-left:auto" onclick="deleteProject('${p.id}')">Delete Project</button>`:''}</div></form></div><div class="card"><h3>Assigned Task Updates</h3><p class="muted">You can save progress and close active tasks assigned to your department. E&P and Manager can update all active tasks. Project-level details can be edited by E&P and Manager.</p><div class="tablewrap"><table><thead><tr><th>Activity</th><th>Responsible</th><th>Status</th><th>Action</th></tr></thead><tbody>${p.tasks.filter((t,i)=>approved(p)&&!done(t)&&taskStatus(p,i)!=='Locked'&&['In Progress','Delayed'].includes(activityState(p,i))&&(['EP','Approver'].includes(role())||role()===normalizeOwner(t.owner))).map(t=>{const i=p.tasks.indexOf(t);return `<tr><td>${esc(t.name)}</td><td>${esc(t.owner)}</td><td>${esc(activityState(p,i))}</td><td><button type="button" onclick="openAssignedTaskUpdate('${p.id}',${i})">Update Task</button></td></tr>`}).join('')||'<tr><td colspan="4" class="muted">No active tasks assigned to your role.</td></tr>'}</tbody></table></div></div>`}
+function openAssignedTaskUpdate(id,i){backToDashboard();portfolioSelection=id;render();openDashboardTaskUpdate(id,i)}
+async function saveProjectDetails(e,id){e.preventDefault();if(!['EP','Approver'].includes(role()))return;let p=find(id);if(!p)return;let f=new FormData(e.target),keys=['name','part','customer','supplier','existing','owner','start','category','scope'],changes=[];let newPicture=null;try{let file=f.get('partPicture');if(file&&file.size)newPicture=await resizePartPicture(file)}catch(err){alert(err.message);return}let updates={};for(let key of keys){let v=String(f.get(key)||'').trim();if(['name','part','start'].includes(key)&&!v)return alert('Project name, part number and start date are required.');updates[key]=v;if(String(p[key]||'')!==v)changes.push({field:key,old:p[key]||'',new:v})}if(newPicture){changes.push({field:'partPicture',old:p.partPicture?'Existing picture':'None',new:'Picture uploaded'})}else if(f.get('removePicture')&&p.partPicture){changes.push({field:'partPicture',old:'Existing picture',new:'Removed'})}if(!changes.length){backToDashboard();return}for(let key of keys)p[key]=updates[key];if(newPicture)p.partPicture=newPicture;else if(f.get('removePicture'))p.partPicture='';p.revisions??=[];for(let c of changes)p.revisions.push({date:new Date().toLocaleString(),who:role(),...c});log('Edited project details: '+changes.map(c=>c.field+' ['+String(c.old).slice(0,80)+' → '+String(c.new).slice(0,80)+']').join('; '),id);backToDashboard()}
+
+function reviseOwner(id,i){if(role()!=='EP')return;let p=find(id),t=p.tasks[i],next=$('to'+i).value,prev=normalizeOwner(t.owner);if(prev===next)return;let reason=prompt('Reason for responsibility change (mandatory):');if(!reason?.trim())return;t.owner=next;p.revisions??=[];p.revisions.push({date:new Date().toLocaleString(),who:role(),field:t.name+' responsible department',old:prev,new:next,reason});log('Changed '+t.name+' responsible: '+prev+' → '+next+'; '+reason,id);render()}
+function reviseDate(id,i){if(role()!=='EP')return;let p=find(id),t=p.tasks[i],s=$('ps'+i).value,e=$('pe'+i).value;if(!s||!e||s>e)return alert('Invalid dates');let reason=prompt('Reason for changing the planned dates (mandatory):');if(!reason?.trim())return;let old=t.planStart+' to '+t.planEnd;t.planStart=s;t.planEnd=e;p.revisions.push({date:new Date().toLocaleString(),who:role(),field:t.name+' schedule',old,new:s+' to '+e,reason});log('Revised '+t.name+' plan: '+old+' → '+s+' to '+e+'; '+reason,id);render()}
+// Pending files are kept separately so an incorrectly selected file can be removed before saving.
+const MAX_ATTACHMENT_BYTES=10*1024*1024;
+const evidenceQueue=new Map();
+let subtaskAttachmentQueue=[];
+function evidenceKey(id,i){return id+'::'+i}
+function queueEvidenceFiles(id,i,input){
+ const key=evidenceKey(id,i),current=evidenceQueue.get(key)||[];
+ const additions=Array.from(input.files||[]);
+ evidenceQueue.set(key,current.concat(additions));
+ input.value='';
+ renderEvidenceQueue(id,i);
+}
+function removeQueuedEvidence(id,i,index){
+ const key=evidenceKey(id,i);
+ const items=evidenceQueue.get(key)||[];
+ if(index<0||index>=items.length)return;
+ items.splice(index,1);
+ if(items.length)evidenceQueue.set(key,items);else evidenceQueue.delete(key);
+ renderEvidenceQueue(id,i);
+}
+function renderEvidenceQueue(id,i){
+ const overlay=document.getElementById('taskUpdateOverlay');
+ const el=overlay?.querySelector('[id="evidenceList'+i+'"]')||document.getElementById('evidenceList'+i);
+ if(!el)return;
+ const items=evidenceQueue.get(evidenceKey(id,i))||[];
+ el.replaceChildren();
+ if(!items.length){const empty=document.createElement('span');empty.className='muted';empty.textContent='No files selected';el.append(empty);return;}
+ const caption=document.createElement('p');caption.className='muted';caption.style.margin='7px 0';caption.textContent='Selected files ('+items.length+') — not uploaded until you save:';el.append(caption);
+ items.forEach((file,index)=>{
+  const row=document.createElement('div');row.style.cssText='display:flex;justify-content:space-between;align-items:center;gap:12px;padding:6px 8px;margin:4px 0;border:1px solid #d9e2eb;border-radius:6px';
+  const name=document.createElement('span');name.style.overflowWrap='anywhere';name.textContent=file.name+' ('+Math.ceil(file.size/1024)+' KB)';
+  const remove=document.createElement('button');remove.type='button';remove.className='warn';remove.textContent='✕';remove.setAttribute('aria-label','Remove '+file.name);
+  remove.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();removeQueuedEvidence(id,i,index)});
+  row.append(name,remove);el.append(row);
+ });
+}
+async function updateTask(id,i,close){let p=find(id),t=p.tasks[i];if(!approved(p)||(!['EP','Approver'].includes(role())&&role()!==normalizeOwner(t.owner))||taskStatus(p,i)==='Locked'||done(t))return;let proposedOwner=$('to'+i)?.value||normalizeOwner(t.owner), proposedStart=$('ps'+i)?.value||t.planStart, proposedEnd=$('pe'+i)?.value||t.planEnd;
+ let ownerChanged=proposedOwner!==normalizeOwner(t.owner),planChanged=proposedStart!==t.planStart||proposedEnd!==t.planEnd;
+ if((ownerChanged||planChanged)&&role()!=='EP')return alert('Only E&P can revise responsibility or planned dates.');
+ if(planChanged&&(!proposedStart||!proposedEnd||proposedStart>proposedEnd))return alert('Invalid planned dates.');
+ let revisionReason='';if(ownerChanged||planChanged){const entered=prompt('Reason for changing responsibility or planned dates (mandatory):');if(entered===null)return;revisionReason=entered.trim();if(!revisionReason)return alert('A reason is required for plan changes.');}
+ let note=$('comment'+i).value.trim(),files=[...(evidenceQueue.get(evidenceKey(id,i))||[])];if(!note&&!files.length&&!ownerChanged&&!planChanged)return alert('Enter remarks, attach evidence, or revise the activity plan.');if(close&&!note)return alert('Closure remarks are mandatory.');let newFiles=[];for(let file of files){if(file.size>MAX_ATTACHMENT_BYTES)return alert('Each attachment must be 10 MB or less.');let data=await new Promise((res,rej)=>{let r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file)});newFiles.push({name:file.name,data,uploadedAt:new Date().toLocaleString(),uploadedBy:role()})}if(ownerChanged||planChanged){p.revisions??=[];if(ownerChanged){const previous=normalizeOwner(t.owner);t.owner=proposedOwner;p.revisions.push({date:new Date().toLocaleString(),who:role(),field:t.name+' responsible department',old:previous,new:proposedOwner,reason:revisionReason});log('Changed '+t.name+' responsible: '+previous+' → '+proposedOwner+'; '+revisionReason,id)}if(planChanged){const previous=t.planStart+' to '+t.planEnd;t.planStart=proposedStart;t.planEnd=proposedEnd;p.revisions.push({date:new Date().toLocaleString(),who:role(),field:t.name+' schedule',old:previous,new:proposedStart+' to '+proposedEnd,reason:revisionReason});log('Revised '+t.name+' plan: '+previous+' → '+proposedStart+' to '+proposedEnd+'; '+revisionReason,id)}}t.files.push(...newFiles);let s=$('as'+i).value,e=$('ae'+i).value;t.actualStart=t.actualStart||s;t.trials.push({date:new Date().toLocaleString(),who:role(),note:note||'Evidence uploaded',files:newFiles.map(f=>f.name)});if(close){if(!confirm('Close this activity and unlock the next one?'))return;t.actualEnd=e;t.status='Completed';let next=p.tasks[i+1];if(next&&!done(next)){next.actualStart=next.actualStart||today();next.status='In Progress';next.trials??=[];next.trials.push({date:new Date().toLocaleString(),who:role(),note:'Automatically initiated after preceding activity closure',files:[]})}}else t.status='In Progress';evidenceQueue.delete(evidenceKey(id,i));log((close?'Closed':'Updated')+' task: '+t.name,id);render()}
+function gantt(){let list=visibleProjects().filter(approved);return `<div class="card"><div class="sectionTitle"><h2>Gantt Chart — Plan vs Actual</h2><div class="actions"><button class="secondary" onclick="backToDashboard()">← Back to Dashboard</button><label>View</label><select style="width:110px" onchange="scale=this.value;render()"><option value="day" ${scale==='day'?'selected':''}>Day</option><option value="week" ${scale==='week'?'selected':''}>Week</option><option value="month" ${scale==='month'?'selected':''}>Month</option></select></div></div><div class="legend"><span><i class="dot" style="background:#6998d6"></i>Plan</span><span><i class="dot" style="background:#168575"></i>Actual</span><span><i class="dot" style="background:#d67b3e"></i>Late completion</span></div><label>Project</label><select id="gproject" onchange="drawGantt(this.value)"><option value="all">All approved projects</option>${list.map(p=>`<option value="${p.id}" ${selected===p.id?'selected':''}>${esc(p.name)}</option>`).join('')}</select><div id="ganttArea" style="margin-top:15px">${renderGantt(list.filter(p=>selected&&selected!=='all'?p.id===selected:true))}</div></div>`}
+function showProjectLibrary(id){selected=id;tab='Project Library';render()}
+function projectLibrary(){
+ const p=find(selected);
+ if(!p)return `<div class="card"><button class="secondary" onclick="backToDashboard()">← Back to Dashboard</button><p>Project not found.</p></div>`;
+ const main=[];let subCount=0;
+ p.tasks.forEach((t,i)=>{
+  const attachments=Array.isArray(t.files)?t.files:[];const used=new Set();
+  (t.trials||[]).forEach(tr=>(tr.files||[]).forEach(filename=>{const j=attachments.findIndex((f,k)=>!used.has(k)&&f.name===filename);if(j>=0){used.add(j);main.push({task:t.name,order:i+1,taskIndex:i,fileIndex:j,file:attachments[j],uploaded:attachments[j].uploadedAt||tr.date||'Not recorded',by:attachments[j].uploadedBy||tr.who||'—'})}}));
+  attachments.forEach((f,j)=>{if(!used.has(j))main.push({task:t.name,order:i+1,taskIndex:i,fileIndex:j,file:f,uploaded:f.uploadedAt||'Not recorded',by:f.uploadedBy||'—'})});
+  subCount+=(t.subtasks||[]).reduce((n,st)=>n+(st.files||[]).length,0);
+ });
+ const header=`<div class="sectionTitle"><div><h2>Project Library — ${esc(p.name)}</h2><p class="muted">${esc(p.part)} · ${main.length+subCount} attachment(s)</p></div><button class="secondary" onclick="backToDashboard()">← Back to Dashboard</button></div>`;
+
+ const shownTasks=new Set(main.map(r=>r.taskIndex));p.tasks.forEach((t,i)=>{if(!shownTasks.has(i)&&(t.subtasks||[]).some(st=>(st.files||[]).length))main.push({task:t.name,order:i+1,taskIndex:i,fileIndex:-1,file:{name:'',data:''},uploaded:'—',by:'—',subtaskOnly:true})});main.sort((a,b)=>a.taskIndex-b.taskIndex);
+ const table=main.length?`<div class="tablewrap"><table><thead><tr><th>#</th><th>Activity</th><th>Attachment</th><th>Uploaded on</th><th>Uploaded by</th><th>Download</th><th>Subtasks</th>${role()==='EP'?'<th style="text-align:right;min-width:110px" aria-label="Attachment actions"></th>':''}</tr></thead><tbody>${main.map((r,i)=>`<tr><td>${i+1}</td><td>${String(r.order).padStart(2,'0')}. ${esc(r.task)}</td><td>${r.subtaskOnly?'—':esc(r.file.name)}</td><td>${esc(r.uploaded)}</td><td>${esc(r.by)}</td><td>${r.subtaskOnly?'—':r.file.data?`<a class="btn secondary" href="${esc(r.file.data)}" download="${esc(r.file.name)}">Download</a>`:'Unavailable'}</td><td>${(p.tasks[r.taskIndex].subtasks||[]).some(st=>(st.files||[]).length)?`<button class="secondary" type="button" onclick="openLibrarySubtasks('${p.id}',${r.taskIndex})">Subtasks</button>`:'—'}</td>${role()==='EP'?`<td style="text-align:right">${r.subtaskOnly?'':`<button class="warn" type="button" onclick="deleteLibraryAttachment('${p.id}',${r.taskIndex},${r.fileIndex})">Delete</button>`}</td>`:''}</tr>`).join('')}</tbody></table></div>`:'<p class="muted">No main-activity attachments uploaded yet.</p>';
+ return `<div class="card">${header}<h3>Main Activity Attachments</h3>${table}</div>`;
+}
+function openLibrarySubtasks(id,taskIndex){
+ const p=find(id),t=p?.tasks?.[taskIndex];if(!t)return;
+ const records=[];(t.subtasks||[]).forEach((st,si)=>(st.files||[]).forEach((f,fi)=>records.push({st,si,f,fi})));
+ const overlay=document.createElement('div');overlay.id='librarySubtasksOverlay';overlay.className='modal-overlay';overlay.style.cssText='position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(12,24,42,.66);padding:24px;box-sizing:border-box;overflow:auto';
+ const panel=document.createElement('div');panel.className='modal-panel';panel.style.cssText='position:relative;margin:auto;width:min(100%,1000px);max-height:calc(100vh - 48px);overflow:auto;background:#fff;color:#1c2b3c;border-radius:12px;padding:24px;box-shadow:0 22px 75px rgba(0,0,0,.35);box-sizing:border-box';
+ panel.innerHTML=`<div class="sectionTitle"><h2>Subtask Attachments — ${esc(t.name)}</h2><button class="secondary" type="button" onclick="closeLibrarySubtasks()">✕ Close</button></div>${records.length?`<div class="tablewrap"><table><thead><tr><th>#</th><th>Subtask</th><th>Attachment</th><th>Uploaded on</th><th>Uploaded by</th><th>Download</th>${role()==='EP'?'<th aria-label="Attachment actions"></th>':''}</tr></thead><tbody>${records.map((r,j)=>`<tr><td>${j+1}</td><td>${esc(r.st.name)}</td><td>${esc(r.f.name)}</td><td>${esc(r.f.uploadedAt||r.st.at||'Not recorded')}</td><td>${esc(r.f.uploadedBy||r.st.by||'—')}</td><td>${r.f.data?`<a class="btn secondary" href="${esc(r.f.data)}" download="${esc(r.f.name)}">Download</a>`:'Unavailable'}</td>${role()==='EP'?`<td style="text-align:right"><button class="secondary" type="button" onclick="replaceSubtaskLibraryFile('${id}',${taskIndex},${r.fi},${r.si})">Update</button> <button class="warn" type="button" onclick="deleteSubtaskLibraryFile('${id}',${taskIndex},${r.fi},${r.si})">Delete</button></td>`:''}</tr>`).join('')}</tbody></table></div>`:'<p>No subtask attachments found.</p>'}`;
+ overlay.append(panel);document.body.append(overlay);overlay.addEventListener('click',e=>{if(e.target===overlay)closeLibrarySubtasks()});
+}
+function closeLibrarySubtasks(){document.getElementById('librarySubtasksOverlay')?.remove()}
+async function deleteSubtaskLibraryFile(id,taskIndex,fileIndex,subtaskIndex){
+ const list=find(id)?.tasks?.[taskIndex]?.subtasks?.[subtaskIndex]?.files;
+ const before=list?.length;
+ await deleteLibraryAttachment(id,taskIndex,fileIndex,subtaskIndex);
+ if(list?.length!==before){closeLibrarySubtasks();openLibrarySubtasks(id,taskIndex)}
+}
+async function replaceSubtaskLibraryFile(id,taskIndex,fileIndex,subtaskIndex){
+ await replaceExistingAttachment(id,taskIndex,subtaskIndex,fileIndex);
+}
+function refreshLibrarySubtasksIfOpen(id,taskIndex){
+ if(document.getElementById('librarySubtasksOverlay')){closeLibrarySubtasks();openLibrarySubtasks(id,taskIndex)}
+}
+async function deleteLibraryAttachment(id,taskIndex,fileIndex,subtaskIndex=null){
+ if(role()!=='EP')return alert('Only E&P Custodian can delete library attachments.');
+ const pin=db.directory?.EP?.passcode;
+ if(!pin)return alert('First set an E&P Custodian passcode in Role Settings.');
+ const entered=await passwordPrompt('Enter E&P Custodian passcode to delete this attachment:');
+ if(entered===null)return;
+ if(await digest(entered)!==pin)return alert('Incorrect E&P passcode. Attachment was not deleted.');
+ const p=find(id),t=p?.tasks[taskIndex],target=subtaskIndex===null?t:t?.subtasks?.[subtaskIndex],f=target?.files?.[fileIndex];if(!f)return alert('Attachment not found.');
+ if(!confirm('Permanently delete "'+f.name+'" from activity "'+t.name+'"? This cannot be undone.'))return;
+ const reason=prompt('Reason for deleting this attachment (mandatory):');if(!reason?.trim())return alert('Deletion cancelled: a reason is required.');
+ target.files.splice(fileIndex,1);
+ // Retain trial history but remove the deleted attachment reference from its file list.
+ if(subtaskIndex===null)(t.trials||[]).forEach(tr=>{if(Array.isArray(tr.files)){const k=tr.files.indexOf(f.name);if(k>=0)tr.files.splice(k,1)}});
+ log('Deleted library attachment '+f.name+' from activity '+t.name+'; reason: '+reason,id);
+ render();
+}
+function showProjectGantt(id){selected=id;tab='Gantt Chart';render()}
+function showProjectFlow(id){selected=id;tab='Process Flow';render()}
+function drawGantt(id){selected=id==='all'?null:id;let list=visibleProjects().filter(p=>approved(p)&&(!selected||p.id===selected));$('ganttArea').innerHTML=renderGantt(list)}
+function renderGantt(projects){if(!projects.length)return '<p class="muted">No approved projects to chart.</p>';let ts=projects.flatMap(p=>p.tasks.flatMap(t=>[
+ {...t,project:p.name},
+ ...(t.subtasks||[]).map(st=>({...st,name:'↳ '+st.name,owner:'Subtask · '+t.name,project:p.name,status:st.status||'Not Started'}))
+ ])),dates=ts.flatMap(t=>[t.planStart,t.planEnd,t.actualStart,t.actualEnd].filter(Boolean)).sort();let start=dates[0],end=dates.at(-1);let unit=scale==='day'?1:scale==='week'?7:30;let total=Math.max(1,Math.ceil((diff(start,end)+2)/unit));let ticks=Array.from({length:total},(_,i)=>add(start,i*unit));let width=Math.max(780,total*(scale==='day'?38:scale==='week'?75:105));let range=Math.max(1,diff(start,add(start,total*unit)));let left=d=>Math.max(0,Math.min(100,diff(start,d)/range*100));let bar=(s,e,cls)=>s&&e?`<div class="bar ${cls}" style="left:${left(s)}%;width:${Math.max(.25,left(add(e,1))-left(s))}%" title="${s} to ${e}"></div>`:'';return `<div class="gantt"><div style="min-width:${width+210}px"><div class="ghead"><div class="gname"><b>Activity</b></div><div class="gtime">${ticks.map(d=>`<div class="tick">${scale==='month'?day(d).toLocaleDateString('en',{month:'short',year:'2-digit'}):scale==='week'?'Wk '+day(d).toLocaleDateString('en',{day:'2-digit',month:'short'}):day(d).toLocaleDateString('en',{day:'2-digit',month:'short'})}</div>`).join('')}</div></div>${ts.map(t=>`<div class="grow"><div class="gname"><b>${esc(t.name)}</b>${t.owner.startsWith("Subtask · ")?"":`<div class="muted">${esc(t.owner)}</div>`}</div><div class="gtime" style="background:repeating-linear-gradient(to right,#fff 0,#fff calc(${100/total}% - 1px),#e7edf4 calc(${100/total}% - 1px),#e7edf4 ${100/total}%)"><span class="lineLabel p">P</span><span class="lineLabel a">A</span>${bar(t.planStart,t.planEnd,'plan')}${bar(t.actualStart,t.actualEnd|| (t.status==='In Progress'?today():''),t.actualEnd&&t.actualEnd>t.planEnd?'late':'actual')}</div></div>`).join('')}</div></div><p class="muted">Blue and green/orange bars occupy separate rows. Plan dates remain visible after actuals are entered.</p>`}
+function approvals(){let pending=visibleProjects().filter(p=>p.approval==='Pending');let changes=db.changes.filter(c=>c.status==='Pending');return `<div class="card"><h2>Project Initiation Approvals</h2>${pending.length?pending.map(p=>`<div class="task"><b>${esc(p.name)}</b> · ${esc(p.part)}<p>${esc(p.scope)} · ${esc(p.category)} · ${esc(p.supplier)}</p><details><summary><b>Review activity plan and responsibilities (${p.tasks.length} activities)</b></summary><div class="tablewrap"><table><tr><th>Activity</th><th>Plan Start</th><th>Plan Finish</th><th>Responsible</th></tr>${p.tasks.map(t=>`<tr><td>${esc(t.name)}</td><td>${esc(t.planStart)}</td><td>${esc(t.planEnd)}</td><td>${esc(normalizeOwner(t.owner)==='EP'?'E&P':t.owner)}</td></tr>`).join('')}</table></div></details><div class="actions" style="margin-top:18px"><button onclick="decideProject('${p.id}',true)" ${role()!=='Approver'?'disabled':''}>Approve</button><button class="warn" onclick="decideProject('${p.id}',false)" ${role()!=='Approver'?'disabled':''}>Reject</button></div></div>`).join(''):'<p class="muted">No pending project initiation requests.</p>'}</div><div class="card"><h2>Workflow Change Approvals</h2>${changes.length?changes.map(c=>`<div class="task"><b>Change request ${esc(c.id)}</b><p>${esc(c.reason)}</p><p>${esc(c.summary)}</p><div class="actions"><button onclick="decideChange('${c.id}',true)" ${role()!=='Approver'?'disabled':''}>Approve & Publish</button><button class="warn" onclick="decideChange('${c.id}',false)" ${role()!=='Approver'?'disabled':''}>Reject</button></div></div>`).join(''):'<p class="muted">No pending workflow changes.</p>'}</div>`}
+async function deleteProject(id){
+ if(role()!=='Approver')return alert('Only Manager / Approver can delete projects.');
+ const p=find(id);if(!p)return alert('Project not found.');
+ const pin=db.directory?.Approver?.passcode;
+ if(!pin)return alert('Please configure the Manager / Approver password in Role Settings before deleting a project.');
+ const entered=await passwordPrompt('Enter Manager / Approver password to delete project "'+p.name+'":');
+ if(entered===null)return;
+ if(await digest(entered)!==pin)return alert('Incorrect password. Project was not deleted.');
+ if(!confirm('PERMANENTLY DELETE "'+p.name+'"? All activities, evidence, schedules and subtasks will be removed. This cannot be undone without a backup.'))return;
+ const reason=prompt('Reason for deletion (mandatory; recorded in audit history):');
+ if(reason===null)return;
+ if(!reason.trim())return alert('Deletion cancelled. A reason is required.');
+ db.projects=db.projects.filter(x=>x.id!==id);
+ log('DELETED project '+p.name+' / '+p.part+'. Reason: '+reason.trim(),id);
+ selected=null;portfolioSelection=null;if(myTasksProject===id)myTasksProject='all';backToDashboard();
+ alert('Project deleted. Deletion recorded in Audit Trail.');
+}
+function initiateFirstActivity(id){if(!['EP','Approver'].includes(role()))return alert('Only E&P or Manager can initiate the first activity.');let p=find(id);if(!p||!approved(p)||!p.tasks.length)return;if(done(p.tasks[0])||p.tasks[0].actualStart)return alert('First activity is already initiated or completed.');let t=p.tasks[0];if(!confirm('Initiate the first activity now? The planned dates will remain unchanged.'))return;t.actualStart=today();t.status='In Progress';t.trials??=[];t.trials.push({date:new Date().toLocaleString(),who:role(),note:'First activity manually initiated',files:[]});log('Manually initiated first activity: '+t.name,id);render()}
+function decideProject(id,yes){if(role()!=='Approver')return;let p=find(id),reason=prompt('Approval / rejection remarks:');if(reason===null)return;p.approval=yes?'Approved':'Rejected';if(!yes){if(portfolioSelection===id)portfolioSelection=null;if(selected===id)selected=null;if(myTasksProject===id)myTasksProject='all';}if(yes&&p.tasks.length){let t=p.tasks[0];if(!done(t)&&!t.actualStart&&t.planStart<=today()){t.actualStart=today();t.status='In Progress';t.trials??=[];t.trials.push({date:new Date().toLocaleString(),who:role(),note:'Automatically initiated on project approval',files:[]})}}log((yes?'Approved':'Rejected')+' project initiation. '+reason,id);render()}
+let workflowEditing=false;
+function workflow(){
+ const canEdit=role()==='EP';
+ const pending=db.changes.filter(c=>c.status==='Pending').length;
+ return `<div class="card"><div class="sectionTitle"><h2>General Workflow · Published Version ${db.version}</h2><div class="actions">${workflowEditing?`<button class="secondary" onclick="cancelWorkflowEdit()">Cancel</button>`:`<button onclick="beginWorkflowEdit()" ${!canEdit?'disabled title="E&P only"':''}>✎ Edit</button>`}</div></div>
+ <div class="note">E&P can edit the activity table and submit all changes together for Manager / Approver approval. The published workflow remains unchanged until approval. Existing projects retain their original workflow snapshots. ${pending?`<b>${pending} workflow change request(s) pending.</b>`:''}</div>
+ ${workflowEditing?`<form id="workflowEditForm" onsubmit="submitWorkflowEdit(event)"><div class="tablewrap"><table><thead><tr><th>#</th><th>Activity</th><th>Department</th><th>Default days</th><th>Required evidence</th></tr></thead><tbody>${db.workflow.map((w,i)=>`<tr><td>${i+1}</td><td><input name="name_${i}" value="${esc(w.name)}" required aria-label="Activity ${i+1}"></td><td><select name="owner_${i}" aria-label="Responsible department ${i+1}">${['E&P','Quality','Production','SCM','PPC'].concat([w.owner].filter(x=>!['E&P','Quality','Production','SCM','PPC'].includes(x))).map(o=>`<option value="${esc(o)}" ${o===w.owner?'selected':''}>${esc(o)}</option>`).join('')}</select></td><td><input name="duration_${i}" type="number" min="1" max="365" value="${Number(w.duration)}" required style="min-width:85px" aria-label="Default duration ${i+1}"></td><td><input name="evidence_${i}" value="${esc(w.evidence)}" required aria-label="Evidence ${i+1}"></td></tr>`).join('')}</tbody></table></div><div class="field" style="margin-top:16px"><label for="workflowReason">Reason / justification for proposed changes (required)</label><textarea id="workflowReason" name="reason" required placeholder="Explain why the workflow needs to be changed..."></textarea></div><div class="actions"><button type="submit">Submit for Approval</button><button type="button" class="secondary" onclick="cancelWorkflowEdit()">Cancel</button></div></form>`:`<div class="tablewrap"><table><thead><tr><th>#</th><th>Activity</th><th>Department</th><th>Default days</th><th>Required evidence</th></tr></thead><tbody>${db.workflow.map((w,i)=>`<tr><td>${i+1}</td><td>${esc(w.name)}</td><td>${esc(w.owner)}</td><td>${esc(w.duration)}</td><td>${esc(w.evidence)}</td></tr>`).join('')}</tbody></table></div>`}</div>`;
+}
+function beginWorkflowEdit(){if(role()!=='EP')return alert('Only E&P can propose workflow changes.');workflowEditing=true;render()}
+function cancelWorkflowEdit(){workflowEditing=false;render()}
+function submitWorkflowEdit(e){
+ e.preventDefault();if(role()!=='EP')return;
+ const f=new FormData(e.target),reason=String(f.get('reason')||'').trim();
+ if(!reason)return alert('A reason is required.');
+ const proposed=db.workflow.map((w,i)=>({...w,name:String(f.get('name_'+i)||'').trim(),owner:String(f.get('owner_'+i)||''),duration:Number(f.get('duration_'+i)),evidence:String(f.get('evidence_'+i)||'').trim()}));
+ if(proposed.some(w=>!w.name||!w.owner||!w.evidence||!Number.isInteger(w.duration)||w.duration<1||w.duration>365))return alert('Please complete every row with valid values.');
+ const changed=proposed.map((w,i)=>({before:db.workflow[i],after:w,i})).filter(x=>['name','owner','duration','evidence'].some(k=>String(x.before[k])!==String(x.after[k])));
+ if(!changed.length)return alert('No changes detected in the workflow table.');
+ const summary=changed.map(x=>`#${x.i+1} ${x.before.name}: `+['name','owner','duration','evidence'].filter(k=>String(x.before[k])!==String(x.after[k])).map(k=>`${k} [${x.before[k]} → ${x.after[k]}]`).join('; ')).join(' | ');
+ db.changes.push({id:'WC-'+Date.now(),baseVersion:db.version,workflow:proposed,reason,summary,status:'Pending',submittedAt:new Date().toISOString(),requestedBy:role()});
+ log(`Submitted workflow change request (${changed.length} edited activities). Reason: ${reason}`);
+ workflowEditing=false;tab='General Workflow';render();alert('Workflow change submitted for Manager approval. Published Version '+db.version+' is unchanged.');
+}
+function decideChange(id,yes){
+ if(role()!=='Approver')return;
+ let c=db.changes.find(x=>x.id===id);if(!c||c.status!=='Pending')return;
+ let reason=prompt('Decision remarks:');if(reason===null)return;
+ if(yes&&c.workflow&&c.baseVersion!==db.version)return alert('This request is based on an outdated workflow version. Please ask E&P to review and resubmit against the latest published version.');
+ c.status=yes?'Approved':'Rejected';c.decision=reason;c.decidedAt=new Date().toISOString();
+ if(yes){if(c.workflow){db.workflow=c.workflow.map(w=>({...w}));db.version++}else{db.workflow[c.idx].duration=c.duration;db.workflow[c.idx].owner=c.owner;db.version++}}
+ log((yes?'Approved and published':'Rejected')+' workflow change '+id+'. '+reason);render();
+}
+
+async function digest(v){const bytes=new TextEncoder().encode(v);const h=await crypto.subtle.digest('SHA-256',bytes);return [...new Uint8Array(h)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+function roleSettings(){return `<div class="card"><h2>Role Directory & Demo Passcodes</h2>${['EP','Approver'].includes(role())?`<div class="actions" style="justify-content:flex-end"><button class="secondary" onclick="addPortalRole()">+ Add Role</button></div>`:''}<div class="note">E&P and Manager / Approver can manage email recipients and demo passcodes. This standalone HTML cannot securely authenticate staff. Passcodes are a local convenience only; production requires server-side identity and permissions. Never reuse work passwords here.</div><div class="tablewrap"><table><tr><th>Role</th><th>Notification email</th><th>Demo passcode</th><th>Manage</th></tr>${allRoles.map((r,i)=>`<tr><td><b>${esc(roleLabel(r))}</b></td><td><input id="mail${i}" type="email" value="${esc(db.directory[r]?.email||'')}" placeholder="name@company.com" ${!['EP','Approver'].includes(role())?'disabled':''}></td><td><div style="display:flex;gap:6px;align-items:center"><input id="pin${i}" type="password" autocomplete="new-password" placeholder="${db.directory[r]?.passcode?'Change passcode':'Set passcode'}" ${!['EP','Approver'].includes(role())?'disabled':''}><button type="button" class="secondary" onclick="toggleRolePassword(${i},this)" aria-label="Show password">Show</button></div></td><td>${['EP','Approver'].includes(role())?`<button type="button" class="secondary" onclick="editPortalRole('${r}')">Edit</button> ${['EP','Approver'].includes(r)?'':`<button type="button" class="warn" onclick="deletePortalRole('${r}')">Delete</button>`}`:''}</td></tr>`).join('')}</table></div><p class="muted">To remove a passcode, use the Reset button below. Email addresses are stored in this browser only.</p><div class="actions"><select id="resetRole" style="max-width:180px">${allRoles.map(r=>`<option value="${r}">${r}</option>`).join('')}</select><button class="secondary" onclick="resetPasscode()" ${!['EP','Approver'].includes(role())?'disabled':''}>Reset demo passcode</button></div><div class="actions" style="justify-content:flex-end;margin-top:16px"><button onclick="saveAllRoles()" ${!['EP','Approver'].includes(role())?'disabled':''}>Save All Changes</button></div></div>`}
+function addPortalRole(){
+ if(!['EP','Approver'].includes(role()))return;
+ const raw=prompt('Enter a unique role name (e.g. Engineering):');if(raw===null)return;
+ const name=raw.trim();if(!/^[A-Za-z][A-Za-z0-9 _-]{1,39}$/.test(name))return alert('Use 2–40 letters, numbers, spaces, underscores or hyphens.');
+ if(allRoles.some(r=>r.toLowerCase()===name.toLowerCase())||Object.values(db.roleLabels||{}).some(x=>x.toLowerCase()===name.toLowerCase()))return alert('This role already exists.');
+ const id='R_'+Date.now().toString(36);allRoles.push(id);db.roles=allRoles;db.roleLabels[id]=name;db.directory[id]={email:'',passcode:''};log('Added role: '+name);render();
+}
+function editPortalRole(id){
+ if(!['EP','Approver'].includes(role()))return;
+ if(id==='EP'||id==='Approver')return alert('Core administrator roles cannot be renamed.');
+ const raw=prompt('Edit role name:',roleLabel(id));if(raw===null)return;
+ const name=raw.trim();if(!/^[A-Za-z][A-Za-z0-9 _-]{1,39}$/.test(name))return alert('Use 2–40 letters, numbers, spaces, underscores or hyphens.');
+ if(allRoles.some(r=>r!==id&&roleLabel(r).toLowerCase()===name.toLowerCase()))return alert('Role name already exists.');
+ const previous=roleLabel(id);db.roleLabels[id]=name;log('Renamed role '+previous+' to '+name);render();
+}
+function deletePortalRole(id){
+ if(!['EP','Approver'].includes(role()))return;
+ if(id==='EP'||id==='Approver')return alert('E&P and Manager roles cannot be deleted.');
+ const assigned=visibleProjects().some(p=>p.tasks.some(t=>normalizeOwner(t.owner)===id))||db.workflow.some(t=>normalizeOwner(t.owner)===id)||visibleProjects().some(p=>p.owner===id);
+ if(assigned)return alert('This role is assigned to a project, activity or General Workflow. Reassign those responsibilities before deleting it.');
+ if(!confirm('Delete role '+roleLabel(id)+'? Its email and demo passcode will be removed.'))return;
+ const reason=prompt('Reason for deleting this role (mandatory):');if(!reason?.trim())return;
+ const name=roleLabel(id);allRoles=allRoles.filter(r=>r!==id);db.roles=allRoles;delete db.directory[id];delete db.roleLabels[id];
+ if(authorizedRole===id){authorizedRole='EP';$('role').value='EP';}
+ log('Deleted role '+name+'; reason: '+reason.trim());render();
+}
+async function saveAllRoles(){
+ if(!['EP','Approver'].includes(role()))return alert('Only E&P or Manager may save role settings.');
+ const updates=[];
+ for(let i=0;i<allRoles.length;i++){
+  const r=allRoles[i],mail=$('mail'+i).value.trim(),pin=$('pin'+i).value;
+  if(mail&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail))return alert('Enter a valid email address for '+r+'.');
+  if(pin&&pin.length<6)return alert('Use at least 6 characters for the demo passcode of '+r+'.');
+  updates.push({r,mail,pin});
+ }
+ const changes=[];
+ for(const u of updates){
+  const entry=db.directory[u.r]||(db.directory[u.r]={email:'',passcode:''});
+  if(entry.email!==u.mail){entry.email=u.mail;changes.push(u.r+' email');}
+  if(u.pin){entry.passcode=await digest(u.pin);changes.push(u.r+' passcode');}
+ }
+ if(changes.length)log('Updated role settings: '+changes.join(', '));else save();
+ alert(changes.length?'All role settings saved successfully.':'No changes to save.');
+ render();
+}
+async function saveRole(r,i){if(!['EP','Approver'].includes(role()))return;let mail=$('mail'+i).value.trim(),pin=$('pin'+i).value;if(mail&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail))return alert('Enter a valid email address.');if(pin&&pin.length<6)return alert('Use at least 6 characters for the demo passcode.');db.directory[r].email=mail;if(pin)db.directory[r].passcode=await digest(pin);log('Updated role directory for '+r);render()}
+function resetPasscode(){if(!['EP','Approver'].includes(role()))return;let r=$('resetRole').value;if(!confirm('Reset demo passcode for '+r+'?'))return;db.directory[r].passcode='';log('Reset demo passcode for '+r);render()}
+function noticeWho(n){if(n.who)return n.who;const match=db.audit.find(a=>a.date===n.date&&a.action===n.action&&a.project===n.project);return match?.who||'Unknown';}
+function noticeHeader(n){return `${n.date} · ${noticeWho(n)} · ${auditProjectName(n.project)}`;}
+function notificationDetails(n){
+ const action=String(n.action||''),project=find(n.project),match=action.match(/^Closed task:\s*(.*?)(?:;|$)/i);
+ let details=[['Date / Time',n.date||'—'],['Updated By',roleLabel(noticeWho(n))],['Project',auditProjectName(n.project)],['Change',action||'—']];
+ if(match&&project){const i=project.tasks.findIndex(t=>t.name===match[1].trim());if(i>=0){const t=project.tasks[i],next=project.tasks[i+1];details.push(['Completed Activity',t.name],['Responsible Department',roleLabel(normalizeOwner(t.owner))],['Actual Completion',t.actualEnd||'Not recorded']);if(next)details.push(['Next Activity',next.name],['Next Responsible Department',roleLabel(normalizeOwner(next.owner))],['Next Planned Start',next.planStart||'Not set'],['Next Status',taskStatus(project,i+1)==='Locked'?'Awaiting previous activity':activityState(project,i+1)]);else details.push(['Next Activity','All project activities completed']);}}
+ return details;
+}
+function notificationPage(){let n=(db.notifications||[]).filter(x=>!/^PD-[A-Za-z0-9-]+$/i.test(String(x.project||''))||!!find(x.project));return `<div class="card"><h2>Activity Notification Center</h2><div class="note">Notifications are grouped by project and change details for easier reading. Compose Email opens the Windows email handler; Windows controls whether an installed-app chooser appears. Emails are drafts only; sending is manual.</div><div class="actions"><button onclick="composeDigest()" ${!n.length?'disabled':''}>Compose All-Member Status Email</button></div>${n.length?n.slice(0,100).map(x=>`<div class="task" style="margin:12px 0;padding:16px;border:1px solid #dbe4ee;border-radius:10px"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap"><div><b style="font-size:15px">${esc(auditProjectName(x.project))}</b><div class="muted">${esc(x.date||'')} · ${esc(roleLabel(noticeWho(x)))}</div></div><button class="secondary" onclick="composeNotice('${esc(x.id)}')">Compose Email</button></div><div class="notice-grid">${notificationDetails(x).filter(d=>!['Date / Time','Updated By','Project'].includes(d[0])).map(d=>`<div class="notice-row"><span>${esc(d[0])}</span><strong>${esc(d[1])}</strong></div>`).join('')}</div><div class="muted" style="margin-top:9px">${(x.recipients||[]).length} configured recipient(s)</div></div>`).join(''):'<p class="muted">No activity notifications yet. Create or update a project to generate alerts.</p>'}</div>`}
+function notificationMessage(n){
+ const d=notificationDetails(n);return ['AHTL PROJECT ACTIVITY NOTIFICATION','==================================',...d.map(([label,value])=>`${label}: ${value}`),'','Please review the AHTL Project Management Portal for further details.'].join('\n');
+}
+function emailLink(subject,body,recipients){
+ recipients=[...new Set((recipients||[]).filter(Boolean))];if(!recipients.length)return alert('E&P must configure role email addresses first.');
+ const old=$('emailAppChooser');if(old)old.remove();
+ const overlay=document.createElement('div');overlay.id='emailAppChooser';overlay.className='pdf-overlay';
+ overlay.innerHTML=`<div class="pdf-dialog" role="dialog" aria-modal="true" aria-labelledby="emailChooserTitle"><h2 id="emailChooserTitle">Choose Email Application</h2><p class="muted">Use the Windows email handler to open an installed email application. Windows may show an app chooser, or may open your default email app automatically. Browsers cannot list installed applications or force Windows to ask every time.</p><div style="display:grid;gap:10px;margin:18px 0"><button type="button" data-email-app="default">Open with Windows email application</button><button type="button" class="secondary" data-email-app="outlook">Outlook on the web</button><button type="button" class="secondary" data-email-app="gmail">Gmail in browser</button></div><p class="muted" style="font-size:12px">To choose a different installed app, change the MAILTO default in Windows Settings → Apps → Default apps. Web options are also available below. Review drafts before sending.</p><div class="actions" style="justify-content:flex-end"><button type="button" class="secondary" data-email-app="cancel">Cancel</button></div></div>`;
+ overlay.addEventListener('click',e=>{if(e.target===overlay){overlay.remove();return;}const btn=e.target.closest('[data-email-app]');if(!btn)return;const app=btn.dataset.emailApp;overlay.remove();if(app==='cancel')return;const to=recipients.join(',');let url;if(app==='gmail')url='https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(to)+'&su='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);else if(app==='outlook')url='https://outlook.office.com/mail/deeplink/compose?to='+encodeURIComponent(to)+'&subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);else url='mailto:'+recipients.map(encodeURIComponent).join(',')+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);if(app==='default')window.location.href=url;else window.open(url,'_blank','noopener,noreferrer');});
+ document.body.appendChild(overlay);
+}
+function composeNotice(id){let n=db.notifications.find(x=>x.id===id&&(!/^PD-[A-Za-z0-9-]+$/i.test(String(x.project||''))||!!find(x.project)));if(n)emailLink('AHTL Project Activity Update - '+auditProjectName(n.project),notificationMessage(n),n.recipients)}
+function composeDigest(){let ns=db.notifications.filter(x=>!/^PD-[A-Za-z0-9-]+$/i.test(String(x.project||''))||!!find(x.project)).slice(0,30);let recipients=allRoles.map(r=>db.directory[r]?.email).filter(Boolean);emailLink('AHTL Development Portal - Activity Status Digest',ns.map((n,i)=>`NOTIFICATION ${i+1}\n${notificationMessage(n)}`).join('\n\n----------------------------------------\n\n'),recipients)}
+
+function auditProjectName(ref){const p=find(ref);return p?p.name:(/^PD-[A-Za-z0-9-]+$/i.test(String(ref||''))?'Deleted Project':(ref||'Portal'));}
+function auditPage(){return `<div class="card"><h2>Audit Trail</h2><div class="scroll">${db.audit.length?db.audit.map(x=>`<div class="audit"><b>${esc(x.date)} · ${esc(x.who)} · ${esc(auditProjectName(x.project))}</b><br>${esc(x.action)}</div>`).join(''):'<p class="muted">No changes recorded yet.</p>'}</div></div><div class="card"><h2>Data Backup / Restore</h2><div class="note">Data is stored centrally in PostgreSQL. Export JSON backups periodically; server backups are also required.</div><div class="actions"><button onclick="exportData()">Export JSON Backup</button><label style="margin:0">Restore backup <input type="file" accept=".json,application/json" onchange="importData(event)"></label><button class="secondary" onclick="exportPDF()">Export Progress</button></div></div><div class="card"><h2>Prototype Limitations</h2><p class="small">Server login uses role passwords configured on the server; per-person accounts and fine-grained permissions are a future upgrade. Notifications are logged locally and email drafts can be composed, but messages are not automatically sent. Evidence is synchronized with the server; large files should be moved to dedicated attachment upload endpoints before production use. Server-side approval enforcement, immutable audit records, automatic email alerts, shared database, access control, enterprise attachments, and automated server-generated PDFs require backend deployment. PDF export here uses your browser’s Print / Save as PDF feature.</p></div>`}
+function exportPDF(){
+ const options=visibleProjects().map(p=>`<option value="${esc(p.id)}">${esc(p.name)} — ${esc(p.part)}</option>`).join('');
+ const existing=$('pdfExportModal');if(existing)existing.remove();
+ const modal=document.createElement('div');modal.id='pdfExportModal';modal.className='pdf-overlay';
+ modal.innerHTML=`<div class="pdf-dialog" role="dialog" aria-modal="true" aria-label="Export PDF"><div class="sectionTitle"><h2>Export PDF Report</h2><button class="secondary" onclick="closePDFModal()">✕</button></div><div class="field"><label><input type="radio" name="pdfMode" value="overall" checked onchange="togglePDFProject()" style="width:auto"> 1. Overall dashboard view</label><p class="muted">Exports the dashboard with the selected year filter (${dashboardYear==='all'?'Show All':esc(dashboardYear)}).</p></div><div class="field"><label><input type="radio" name="pdfMode" value="project" onchange="togglePDFProject()" style="width:auto"> 2. Specific project dashboard + Gantt chart</label><p class="muted">Only the selected project's summary and its Plan / Actual Gantt chart.</p></div><div class="field"><label for="pdfProject">Select project</label><select id="pdfProject" disabled><option value="">Choose a project...</option>${options}</select></div><div class="actions"><button onclick="printSelectedPDF()">Prepare PDF Report</button><button class="secondary" onclick="closePDFModal()">Cancel</button></div><p class="muted">Use Print → Save as PDF in the report window.</p></div>`;
+ document.body.appendChild(modal);
+}
+function closePDFModal(){$('pdfExportModal')?.remove()}
+function togglePDFProject(){const project=document.querySelector('input[name="pdfMode"]:checked')?.value==='project';$('pdfProject').disabled=!project}
+function projectReport(p){
+ const i=p.tasks.findIndex(t=>!done(t)),cur=i<0?'Completed':p.tasks[i].name,next=i>=0?p.tasks[i+1]?.name||'—':'—';
+ const projectEnd=p.tasks.map(t=>t.planEnd).filter(Boolean).sort().at(-1)||'—';
+ const picture=p.partPicture?`<img src="${esc(p.partPicture)}" alt="Part picture" class="report-part-picture">`:`<span class="muted">No part picture uploaded</span>`;
+ const field=(label,value,extra='')=>`<div class="report-field ${extra}"><strong>${label}</strong><div>${value}</div></div>`;
+ return `<div class="card report-project-card"><h2>Project Dashboard — ${esc(p.name)}</h2><div class="report-project-grid">
+ ${field('Project Name',esc(p.name))}${field('Part No.',esc(p.part))}
+ ${field('Status',esc(status(p)))}${field('Progress',`${pct(p)}%<div class="progress"><div style="width:${pct(p)}%"></div></div>`)}${field('Project Owner',esc(p.owner||'—'))}
+ ${field('Project Start',esc(p.start||'—'))}${field('Project End',esc(projectEnd))}${field('Part Picture',picture,'report-picture-field')}
+ ${field('Current Activity',esc(cur))}${field('Next Activity',esc(next))}
+ </div></div><div class="card"><h2>Project Gantt — Plan vs Actual (${scale==='day'?'Daily':scale==='week'?'Weekly':'Monthly'} view)</h2><div class="legend"><span><i class="dot" style="background:#6998d6"></i>Plan</span><span><i class="dot" style="background:#168575"></i>Actual</span><span><i class="dot" style="background:#d67b3e"></i>Late completion</span></div>${renderGantt([p])}</div>`;
+}
+function printSelectedPDF(){
+ const mode=document.querySelector('input[name="pdfMode"]:checked')?.value;
+ let title,body;
+ if(mode==='project'){
+  const id=$('pdfProject').value,p=find(id);if(!p)return alert('Please select a project first.');
+  title='Project Report — '+p.name;body=projectReport(p);
+ }else{
+  title='Overall Dashboard — '+(dashboardYear==='all'?'All Years':dashboardYear);
+  body=dashboard();
+  body=body.replace(/<button\b[^>]*>[\s\S]*?<\/button>/gi,'');
+ }
+ const styles=[...document.querySelectorAll('style')].map(el=>el.textContent).join('\n');
+ const report=window.open('','_blank');if(!report)return alert('Please allow pop-ups for this local file to generate the report.');
+ const extra=`<style>body{background:white;padding:18px} .report-head{border-bottom:2px solid #164d7c;margin-bottom:16px;padding-bottom:12px}.report-head h1{font-size:20px;margin:0 0 6px}.report-content{width:100%}.pdf-toolbar{margin-bottom:15px}.pdf-toolbar button{margin-right:8px}@media print{.pdf-toolbar{display:none!important}.gantt{overflow:visible!important}.card{break-inside:auto!important} .grow{break-inside:avoid} @page{size:A3 landscape;margin:10mm}}</style>`;
+ report.document.open();report.document.write('<!doctype html><html><head><meta charset="utf-8"><title>'+esc(title)+'</title><style>'+styles+'</style>'+extra+'</head><body><div class="pdf-toolbar"><button onclick="window.print()">Print / Save as PDF</button><button class="secondary" onclick="window.close()">Close</button></div><div class="report-head"><h1>AHTL — '+esc(title)+'</h1><div class="muted">Generated '+esc(new Date().toLocaleString())+' · Local prototype report</div></div><div class="report-content">'+body+'</div></body></html>');report.document.close();report.focus();closePDFModal();
+}
+
+function exportData(){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(db,null,2)],{type:'application/json'}));a.download='AHTL_Project_Backup_'+today()+'.json';a.click();URL.revokeObjectURL(a.href)}function exportCSV(){let rows=[['ID','Project','Part','Approval','Status','Progress','Current','Next','Due'],...visibleProjects().map(p=>{let i=p.tasks.findIndex(t=>!done(t));return [p.id,p.name,p.part,p.approval,status(p),pct(p)+'%',p.tasks[i]?.name||'',p.tasks[i+1]?.name||'',p.tasks[i]?.planEnd||'']})];let csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\r\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='AHTL_Projects.csv';a.click();URL.revokeObjectURL(a.href)}
+async function importData(e){let f=e.target.files[0];if(!f)return;try{let d=JSON.parse(await f.text());if(!Array.isArray(d.projects)||!Array.isArray(d.workflow)||!Array.isArray(d.audit))throw Error('Invalid format');if(!confirm('Replace all local portal data with this backup?'))return;db=d;allRoles=Array.isArray(db.roles)&&db.roles.length?db.roles:['EP','Approver','Quality','Production','SCM','PPC'];db.roles=allRoles;db.roleLabels??={};db.directory??=Object.fromEntries(allRoles.map(r=>[r,{email:'',passcode:''}]));db.notifications??=[];selected=null;log('Restored backup');render()}catch(err){alert('Unable to restore: '+err.message)}}
+loginInit();
+</script></body></html>
